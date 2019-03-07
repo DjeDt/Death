@@ -1,0 +1,325 @@
+50             push rax
+57             push rdi
+56             push rsi
+51             push rcx
+52             push rdx
+4150           push r8
+4151           push r9
+4152           push r10
+
+48ffc8         dec rax
+48ffcf         dec rdi
+48ffce         dec rsi
+48ffc9         dec rcx
+48ffca         dec rdx
+49ffc8         dec r8
+49ffc9         dec r9
+49ffca         dec r10
+
+48ffc0         inc rax
+48ffc7         inc rdi
+48ffc6         inc rsi
+48ffc1         inc rcx
+48ffc2         inc rdx
+49ffc0         inc r8
+49ffc1         inc r9
+49ffc2         inc r10
+
+4889c0         mov rax, rax
+4889f8         mov rax, rdi
+4889f0         mov rax, rsi
+4889c8         mov rax, rcx
+4889d0         mov rax, rdx
+4c89c0         mov rax, r8
+4c89c8         mov rax, r9
+4c89d0         mov rax, r10
+
+4889c7         mov rdi, rax
+4889ff         mov rdi, rdi
+4889f7         mov rdi, rsi
+4889cf         mov rdi, rcx
+4889d7         mov rdi, rdx
+4c89c7         mov rdi, r8
+4c89cf         mov rdi, r9
+4c89d7         mov rdi, r10
+
+4889c6         mov rsi, rax
+4889fe         mov rsi, rdi
+4889f6         mov rsi, rsi
+4889ce         mov rsi, rcx
+4889d6         mov rsi, rdx
+4c89c6         mov rsi, r8
+4c89ce         mov rsi, r9
+4c89d6         mov rsi, r10
+
+4889c1         mov rcx, rax
+4889f9         mov rcx, rdi
+4889f1         mov rcx, rsi
+4889c9         mov rcx, rcx
+4889d1         mov rcx, rdx
+4c89c1         mov rcx, r8
+4c89c9         mov rcx, r9
+4c89d1         mov rcx, r10
+
+4889c2         mov rdx, rax
+4889fa         mov rdx, rdi
+4889f2         mov rdx, rsi
+4889ca         mov rdx, rcx
+4889d2         mov rdx, rdx
+4c89c2         mov rdx, r8
+4c89ca         mov rdx, r9
+4c89d2         mov rdx, r10
+
+4989c0         mov r8, rax
+4989f8         mov r8, rdi
+4989f0         mov r8, rsi
+4989c8         mov r8, rcx
+4989d0         mov r8, rdx
+4d89c0         mov r8, r8
+4d89c8         mov r8, r9
+4d89d0         mov r8, r10
+
+4989c1         mov r9, rax
+4989f9         mov r9, rdi
+4989f1         mov r9, rsi
+4989c9         mov r9, rcx
+4989d1         mov r9, rdx
+4d89c1         mov r9, r8
+4d89c9         mov r9, r9
+4d89d1         mov r9, r10
+
+4989c2         mov r10, rax
+4989fa         mov r10, rdi
+4989f2         mov r10, rsi
+4989ca         mov r10, rcx
+4989d2         mov r10, rdx
+4d89c2         mov r10, r8
+4d89ca         mov r10, r9
+4d89d2         mov r10, r10
+
+4831c0         xor rax, rax
+4831f8         xor rax, rdi
+4831f0         xor rax, rsi
+4831c8         xor rax, rcx
+4831d0         xor rax, rdx
+4c31c0         xor rax, r8
+4c31c8         xor rax, r9
+4c31d0         xor rax, r10
+
+4831c7         xor rdi, rax
+4831ff         xor rdi, rdi
+4831f7         xor rdi, rsi
+4831cf         xor rdi, rcx
+4831d7         xor rdi, rdx
+4c31c7         xor rdi, r8
+4c31cf         xor rdi, r9
+4c31d7         xor rdi, r10
+
+4831c6         xor rsi, rax
+4831fe         xor rsi, rdi
+4831f6         xor rsi, rsi
+4831ce         xor rsi, rcx
+4831d6         xor rsi, rdx
+4c31c6         xor rsi, r8
+4c31ce         xor rsi, r9
+4c31d6         xor rsi, r10
+
+4831c1         xor rcx, rax
+4831f9         xor rcx, rdi
+4831f1         xor rcx, rsi
+4831c9         xor rcx, rcx
+4831d1         xor rcx, rdx
+4c31c1         xor rcx, r8
+4c31c9         xor rcx, r9
+4c31d1         xor rcx, r10
+
+4831c2         xor rdx, rax
+4831fa         xor rdx, rdi
+4831f2         xor rdx, rsi
+4831ca         xor rdx, rcx
+4831d2         xor rdx, rdx
+4c31c2         xor rdx, r8
+4c31ca         xor rdx, r9
+4c31d2         xor rdx, r10
+
+4931c0         xor r8, rax
+4931f8         xor r8, rdi
+4931f0         xor r8, rsi
+4931c8         xor r8, rcx
+4931d0         xor r8, rdx
+4d31c0         xor r8, r8
+4d31c8         xor r8, r9
+4d31d0         xor r8, r10
+
+4931c1         xor r9, rax
+4931f9         xor r9, rdi
+4931f1         xor r9, rsi
+4931c9         xor r9, rcx
+4931d1         xor r9, rdx
+4d31c1         xor r9, r8
+4d31c9         xor r9, r9
+4d31d1         xor r9, r10
+
+4931c2         xor r10, rax
+4931fa         xor r10, rdi
+4931f2         xor r10, rsi
+4931ca         xor r10, rcx
+4931d2         xor r10, rdx
+4d31c2         xor r10, r8
+4d31ca         xor r10, r9
+4d31d2         xor r10, r10
+
+4839c0         cmp rax, rax
+4839f8         cmp rax, rdi
+4839f0         cmp rax, rsi
+4839c8         cmp rax, rcx
+4839d0         cmp rax, rdx
+4c39c0         cmp rax, r8
+4c39c8         cmp rax, r9
+4c39d0         cmp rax, r10
+
+4839c7         cmp rdi, rax
+4839ff         cmp rdi, rdi
+4839f7         cmp rdi, rsi
+4839cf         cmp rdi, rcx
+4839d7         cmp rdi, rdx
+4c39c7         cmp rdi, r8
+4c39cf         cmp rdi, r9
+4c39d7         cmp rdi, r10
+
+4839c6         cmp rsi, rax
+4839fe         cmp rsi, rdi
+4839f6         cmp rsi, rsi
+4839ce         cmp rsi, rcx
+4839d6         cmp rsi, rdx
+4c39c6         cmp rsi, r8
+4c39ce         cmp rsi, r9
+4c39d6         cmp rsi, r10
+
+4839c1         cmp rcx, rax
+4839f9         cmp rcx, rdi
+4839f1         cmp rcx, rsi
+4839c9         cmp rcx, rcx
+4839d1         cmp rcx, rdx
+4c39c1         cmp rcx, r8
+4c39c9         cmp rcx, r9
+4c39d1         cmp rcx, r10
+
+4839c2         cmp rdx, rax
+4839fa         cmp rdx, rdi
+4839f2         cmp rdx, rsi
+4839ca         cmp rdx, rcx
+4839d2         cmp rdx, rdx
+4c39c2         cmp rdx, r8
+4c39ca         cmp rdx, r9
+4c39d2         cmp rdx, r10
+
+4939c0         cmp r8, rax
+4939f8         cmp r8, rdi
+4939f0         cmp r8, rsi
+4939c8         cmp r8, rcx
+4939d0         cmp r8, rdx
+4d39c0         cmp r8, r8
+4d39c8         cmp r8, r9
+4d39d0         cmp r8, r10
+
+4939c1         cmp r9, rax
+4939f9         cmp r9, rdi
+4939f1         cmp r9, rsi
+4939c9         cmp r9, rcx
+4939d1         cmp r9, rdx
+4d39c1         cmp r9, r8
+4d39c9         cmp r9, r9
+4d39d1         cmp r9, r10
+
+4939c2         cmp r10, rax
+4939fa         cmp r10, rdi
+4939f2         cmp r10, rsi
+4939ca         cmp r10, rcx
+4939d2         cmp r10, rdx
+4d39c2         cmp r10, r8
+4d39ca         cmp r10, r9
+4d39d2         cmp r10, r10
+
+4885c0         test rax, rax
+4885f8         test rax, rdi
+4885f0         test rax, rsi
+4885c8         test rax, rcx
+4885d0         test rax, rdx
+4c85c0         test rax, r8
+4c85c8         test rax, r9
+4c85d0         test rax, r10
+
+4885c7         test rdi, rax
+4885ff         test rdi, rdi
+4885f7         test rdi, rsi
+4885cf         test rdi, rcx
+4885d7         test rdi, rdx
+4c85c7         test rdi, r8
+4c85cf         test rdi, r9
+4c85d7         test rdi, r10
+
+4885c6         test rsi, rax
+4885fe         test rsi, rdi
+4885f6         test rsi, rsi
+4885ce         test rsi, rcx
+4885d6         test rsi, rdx
+4c85c6         test rsi, r8
+4c85ce         test rsi, r9
+4c85d6         test rsi, r10
+
+4885c1         test rcx, rax
+4885f9         test rcx, rdi
+4885f1         test rcx, rsi
+4885c9         test rcx, rcx
+4885d1         test rcx, rdx
+4c85c1         test rcx, r8
+4c85c9         test rcx, r9
+4c85d1         test rcx, r10
+
+4885c2         test rdx, rax
+4885fa         test rdx, rdi
+4885f2         test rdx, rsi
+4885ca         test rdx, rcx
+4885d2         test rdx, rdx
+4c85c2         test rdx, r8
+4c85ca         test rdx, r9
+4c85d2         test rdx, r10
+
+4985c0         test r8, rax
+4985f8         test r8, rdi
+4985f0         test r8, rsi
+4985c8         test r8, rcx
+4985d0         test r8, rdx
+4d85c0         test r8, r8
+4d85c8         test r8, r9
+4d85d0         test r8, r10
+
+4985c1         test r9, rax
+4985f9         test r9, rdi
+4985f1         test r9, rsi
+4985c9         test r9, rcx
+4985d1         test r9, rdx
+4d85c1         test r9, r8
+4d85c9         test r9, r9
+4d85d1         test r9, r10
+
+4985c2         test r10, rax
+4985fa         test r10, rdi
+4985f2         test r10, rsi
+4985ca         test r10, rcx
+4985d2         test r10, rdx
+4d85c2         test r10, r8
+4d85ca         test r10, r9
+4d85d2         test r10, r10
+
+415a           pop r10
+4159           pop r9
+4158           pop r8
+5a             pop rdx
+59             pop rcx
+5e             pop rsi
+5f             pop rdi
+58             pop rax
+
+90             nop
