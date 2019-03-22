@@ -54,5 +54,3 @@ dkms.conf
 .gdb_history
 peda-session-war.txt
 tbin
-patcher
-war

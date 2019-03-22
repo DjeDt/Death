@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/03/22 14:10:05 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/03/22 17:17:12 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -71,6 +71,6 @@ clean:
 	/bin/rm -rf $(OBJ_DIR)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	/bin/rm -f $(NAME) $(PATCHER)
 
 re: fclean all
