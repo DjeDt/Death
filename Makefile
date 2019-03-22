@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/03/20 18:35:42 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/03/22 14:10:05 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,13 +38,11 @@ SRCS_WAR =			\
 	inject.c		\
 	release.c		\
 	cypher_end.c	\
-	misc.c			\
-	lib.c
+	misc.c
 
 SRCS_PATCH =		\
 	patcher.c		\
-	misc.c			\
-	lib.c
+	misc.c
 
 # WAR
 OBJ_WAR = $(SRC_WAR:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

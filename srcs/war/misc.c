@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 16:51:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/20 12:33:20 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/22 14:15:13 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ void update_one(t_key *key,  char *caller,  size_t size)
 	key->junk[1] = 12;
 	for (register size_t index = 0; index < size; index++)
 	{
+
 		key->one += caller[index];
 		key->junk[index % 2] = index ^ key->one;
 		key->one += caller[index] ^ (key->junk[index % 2] + 1);
 		key->junk[index % 2] |= key->one;
 		key->one += key->junk[index % 2];
 	}
+	key += 1;
 }
 
 void update_two(t_key *key,  char *caller,  size_t size)
@@ -58,11 +60,7 @@ void	revert_two(t_key *key, char *ptr, size_t size)
 	}
 }
 
-int         random_number(int limit)
+void			end_of_data(void)
 {
-	uint8_t val[4];
-
-	if (_get_random(val, 4, 0) < 0)
-		return (0);
-	return ((int)*val % limit);
+	return ;
 }

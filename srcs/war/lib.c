@@ -18,20 +18,7 @@ ssize_t	_get_random(void *buf, size_t buflen, unsigned int flags)
 	return (ret);
 }
 
-int		_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count)
+void	end_lib(void)
 {
-	long ret;
-
-	__asm__ __volatile__ (
-		"mov edi, %0;"
-		"mov rsi, %1;"
-		"mov edx, %2;"
-		"mov rax, 217;"
-		"syscall" :: "g"(fd), "g"(dirp), "g"(count)
-		);
-	__asm__ __volatile__ (
-		"mov %0, rax" : "=r"(ret)
-		);
-
-	return ((int)ret);
+	return ;
 }
