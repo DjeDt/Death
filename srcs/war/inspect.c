@@ -1,100 +1,13 @@
 #include "war.h"
 
-__INLINE__ static int _open(const char *path, int flags, mode_t mode)
-{
-	long ret;
-
-	__asm__ __volatile__ (
-		"mov rdi, %0;"
-		"mov esi, %1;"
-		"mov edx, %2;"
-		"mov rax, 2;"
-		"syscall;" :: "g"(path), "g"(flags), "g"(mode)
-		);
-	__asm__ __volatile__ (
-		"mov %0, rax" : "=r"(ret)
-		);
-
-	return ((int)ret);
-}
-
-__INLINE__ static int      _fstat(int fd, struct stat *statbuf)
-{
-	long ret;
-
-	__asm__ __volatile__ (
-		"mov edi, %0;"
-		"mov rsi, %1;"
-		"mov rax, 5;"
-		"syscall" :: "g"(fd), "g"(statbuf)
-		);
-	__asm__ __volatile__ (
-		"mov %0, rax" : "=r"(ret)
-		);
-
-	return ((int)ret);
-}
-
-__INLINE__ static int _close(int fd)
-{
-	long ret;
-
-	__asm__ __volatile__ (
-		"mov edi, %0;"
-		"mov rax, 3;"
-		"syscall" :: "g"(fd)
-		);
-	__asm__ __volatile__ (
-		"mov %0, rax" : "=r"(ret)
-		);
-
-	return ((int)ret);
-}
-
-__INLINE__ static void    *_mmap(void *addr, size_t len, int prot, size_t flags, size_t fd, off_t offset)
-{
-	void *ret;
-
-	__asm__ __volatile__ (
-		"mov rdi, %0;"
-		"mov rsi, %1;"
-		"mov edx, %2;"
-		"mov r10, %3;"
-		"mov r8, %4;"
-		"mov r9, %5;"
-		"mov rax, 9;"
-		"syscall" :: "g"(addr), "g"(len), "g"(prot), "g"(flags), "g"(fd), "g"(offset)
-		);
-	__asm__ __volatile__ (
-		"mov %0, rax" : "=r"(ret)
-		);
-
-	return ((void*)ret);
-}
-
-__INLINE__ static int     _munmap(void *addr, size_t len)
-{
-	long ret;
-
-	__asm__ __volatile__ (
-		"mov rdi, %0;"
-		"mov rsi, %1;"
-		"mov rax, 11;"
-		"syscall" :: "g"(addr), "g"(len)
-		);
-	__asm__ __volatile__ (
-		"mov %0, rax" : "=r"(ret)
-		);
-
-	return (ret);
-}
-
 void	inspect(t_data *data, char *path)
 {
 //	revert_two(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
-	update_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
+//	update_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 //	printf("inspect key = %lx\n", data->key.two);
 
+	char de[] = "inspect\n";
+	_write(1, de, 8);
 	if (data->context != true)
 		goto ERR;
 
@@ -121,6 +34,9 @@ void	inspect(t_data *data, char *path)
 		goto ERR;
 	}
 	data->context = true;
+	_write(1, path, _strlen(path));
+	char de2[] = "\n";
+	_write(1, de2, 1);
 
 ERR:
 //	revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);

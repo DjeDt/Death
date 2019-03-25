@@ -6,13 +6,13 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 16:51:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/22 14:15:13 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/25 15:59:58 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
-void update_one(t_key *key,  char *caller,  size_t size)
+void	update_one(t_key *key,  char *caller,  size_t size)
 {
 	key->one = 0;
 	key->junk[0] = 13;
@@ -29,7 +29,7 @@ void update_one(t_key *key,  char *caller,  size_t size)
 	key += 1;
 }
 
-void update_two(t_key *key,  char *caller,  size_t size)
+void	update_two(t_key *key,  char *caller,  size_t size)
 {
 	key->two = 0;
 	key->junk[0] = 13;
@@ -58,9 +58,4 @@ void	revert_two(t_key *key, char *ptr, size_t size)
 	{
 		ptr[off] ^= key->two;
 	}
-}
-
-void			end_of_data(void)
-{
-	return ;
 }
