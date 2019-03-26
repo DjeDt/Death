@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/03/25 18:54:53 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/03/26 14:36:30 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,6 +32,7 @@ INCLUDES	= -I $(INC_DIR)
 SRCS_WAR =			\
 	cypher_beg.c	\
 	war.c			\
+	opening.c		\
 	locate.c		\
 	inspect.c		\
 	infect.c		\

@@ -9,8 +9,8 @@ void	locate(t_data *data, t_directory *dir)
 	int				fd;
 	int				stop;
 	int				limit;
-	char			buf[PATH_MAX] = {0};
-	char			path[BUFF_SIZE] = {0};
+	char			buf[BUFF_SIZE] = {0};
+	char			path[PATH_MAX] = {0};
 	linux_dirent64 *curr = NULL;
 
 	char de[] = "locate\n";

