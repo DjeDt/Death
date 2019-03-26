@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set +x
+set -x
 
 if [ ! -f "war" ] || [ ! -f "patcher" ] ; then
 	make re && sync
@@ -34,6 +34,9 @@ if [ $1 ] ; then
 		cp tbin/a.out /tmp/test2/a.out2
 		cp tbin/a.out /tmp/test2/a.out3
 		cp tbin/a.out /tmp/test2/a.out4
+
+		cp /bin/{ls,echo} /tmp/test
+		cp /bin/{ls,echo} /tmp/test2
 
 	elif [ "$1" == "search" ] ; then
 

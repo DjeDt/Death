@@ -19,23 +19,18 @@ void	locate(t_data *data, t_directory *dir)
 	data->context = false;
 	if (_memcpy(path, dir->path[dir->entry], _strlen(dir->path[dir->entry])) != path)
 		goto ERR;
-	char de2[] = "a\n";
+
 	if ((fd = _open(path, O_RDONLY, 0000)) < 0)
 		goto ERR;
 
-	_write(1, de2, 2);
    	while ((limit = _getdents64(fd, (struct linux_dirent64 *)buf, BUFF_SIZE)) > 0)
 	{
-		_write(1, de2, 2);
 		for (register int i = 0 ; i < limit ; i += curr->d_reclen)
 		{
-			_write(1, de2, 2);
 			curr = (struct linux_dirent64 *)(buf + i);
 			dir->entry++;
 		}
 	}
-	char de3[] = "b";
-	_write(1, de3, 2);
 	if (_close(fd) < 0 || dir->entry <= 0)
 		goto ERR;
 

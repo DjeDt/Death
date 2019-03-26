@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/25 19:48:50 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/26 11:51:09 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct	s_data
 	Elf64_Addr	vrs_entry;
 	Elf64_Addr	cpr_entry;
 
-	void		*rbp;
 	void		*rsp;
 	size_t		context;
 }				t_data;

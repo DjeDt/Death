@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/25 19:54:36 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/26 14:07:42 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		main(void)
 void	start(void)
 {
 	__asm__ __volatile__ (
+		"push	rbp;"
+		"push	0x0;"
 		"push	rbx;"
 		"push	rax;"
 		"push	rdi;"
@@ -35,14 +37,13 @@ void	start(void)
 		"push	r13;"
 		"push	r14;"
 		"push	r15;"
-		"push	rbp;"
-		"push	rsp;"
 		);
 
 	t_data	data = {0};
+
 	__asm__ __volatile__ (
-		"mov	%0, rsp;"
-		:: "g"(data.rsp)
+		"mov	%0, rsp"
+		: "=r"(data.rsp)
 		);
 	cypher_beg(&data);
 }
