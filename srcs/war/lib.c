@@ -50,6 +50,32 @@ int				_strncmp(char *s1, char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
+bool     generate_key(uint8_t *key, size_t size)
+{
+	int     fd;
+	char	path[] = "/dev/random";
+
+	fd = _open(path, O_RDONLY, 0000);
+	if (fd < 0)
+		return (false);
+	if (_read(fd, key, size) == -1)
+	{
+		_close(fd);
+		return (false);
+	}
+	_close(fd);
+	return (true);
+}
+
+void    __exit(int status)
+{
+	__asm__ __volatile__ (
+		"mov edi, %0;"
+		"mov rax, 60;"
+		"syscall;" :: "g" (status)
+		);
+}
+
 int		_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count)
 {
 	long ret;

