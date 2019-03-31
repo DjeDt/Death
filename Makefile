@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/03/31 19:38:59 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/03/31 20:58:42 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,7 +36,7 @@ SRCS_PATCH =		\
 	misc.c
 
 SRCS_WAR =			\
-	cypher_beg.c	\
+	start.c			\
 	opening.c		\
 	war.c			\
 	locate.c		\
@@ -44,7 +44,7 @@ SRCS_WAR =			\
 	infect.c		\
 	inject.c		\
 	release.c		\
-	cypher_end.c	\
+	end.c			\
 	misc.c
 
 SRCS_S =			\

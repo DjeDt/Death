@@ -1,17 +1,17 @@
 #include "war.h"
 #include <string.h>
 
-#define START_ADDR		0x11b5
-#define OPENING_ADDR	0x1295
-#define WAR_ADDR		0x1089
-#define LOCATE_ADDR		0x19b3
-#define INSPECT_ADDR	0x1d9c
-#define INFECT_ADDR		0x203c
-#define INJECT_ADDR		0x237c
-#define RELEASE_ADDR	0x26f2
-#define CYPHEREND_ADDR	0x27ee
-#define END_ADDR		0x289c
-#define ENDOFDATA_ADDR	0x2ffc
+#define START_ADDR		0x11f1
+#define OPENING_ADDR	0x130d
+#define WAR_ADDR		0x1809
+#define LOCATE_ADDR		0x19da
+#define INSPECT_ADDR	0x1dc3
+#define INFECT_ADDR		0x2097
+#define INJECT_ADDR		0x23ca
+#define RELEASE_ADDR	0x2767
+#define CYPHEREND_ADDR	0x2863
+#define END_ADDR		0x2914
+#define ENDOFDATA_ADDR	0x316a
 
 #define ENT_SIZE	OPENING_ADDR - START_ADDR
 #define F1_SIZE		WAR_ADDR - OPENING_ADDR
@@ -27,8 +27,8 @@
 #define PACKER_KEY		0x11f1
 // opening
 #define PACKER_START	0x130d
-// end - opening
-#define END				0x289b
+// _rc4 - opening
+#define END				0x2bf0
 #define PACKER_SIZE		END - PACKER_START
 
 char *ptr;
@@ -55,10 +55,11 @@ void segment_write(char *ptr)
 
 int main(void)
 {
-	int		fd;
-	char	*filename = "./war";
-	t_key	keychain = {0};
-	struct stat statbuf;
+	int			fd;
+	char		*filename = "./war";
+	t_key		keychain = {0};
+	uint8_t		pack_key[KEY_SIZE];
+	struct stat	statbuf;
 
 	if ((fd = open(filename, O_RDWR)) < 0)
 	{
@@ -80,13 +81,9 @@ int main(void)
 
 	segment_write(ptr);
 
-	uint8_t pack_key[KEY_SIZE];
 	(void)keychain;
 
 	memcpy(pack_key, ptr + PACKER_KEY, KEY_SIZE);
-	for (int i = 0 ; i < KEY_SIZE ; i++)
-		printf("0x%x ", (uint8_t)pack_key[i]);
-	printf("\n");
   	_rc4(pack_key, KEY_SIZE, (uint8_t*)ptr + PACKER_START, PACKER_SIZE);
 
 	// release -> cypher_end

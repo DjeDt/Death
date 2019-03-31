@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 18:26:15 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 21:06:39 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	opening(t_data *data)
 
 # ifdef DEBUG
 	char de[] = "opening\t \n";
-	data->context == true ?	de[9] = 49 : 48;
+	data->context == true ?	de[8] = 49 : 48;
 	_write(1, de, _strlen(de));
 #endif
 

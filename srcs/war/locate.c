@@ -4,7 +4,6 @@ void	locate(t_data *data, t_directory *dir)
 {
 //	revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
 //	update_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
-//	printf("locate key = %lx\n", data->key.one);
 
 	int				fd;
 	int				stop;

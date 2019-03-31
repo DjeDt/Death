@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 16:42:32 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:49:45 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void		release(t_data *data)
 {
-#ifdef ENCRYPT
 //	revert_one(&data->key, (char*)inject, (size_t)release - (size_t)inject);
-#endif
 
 #ifdef DEBUG
 	char de[] = "release\t \n";

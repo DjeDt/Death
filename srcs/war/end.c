@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cypher_end.c                                       :+:      :+:    :+:   */
+/*   end.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:19:24 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 16:43:01 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 20:58:27 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	cypher_end(t_data *data)
 {
-#ifdef ENCRYPT
 	/* if (data->context == true || data->context == false) */
 	/* 	revert_one(&data->key, (char*)release, (size_t)cypher_end - (size_t)release); */
-#endif
 
 #ifdef DEBUG
 	char de[] = "cypher_end\t \n";

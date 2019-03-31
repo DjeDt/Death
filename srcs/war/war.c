@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 16:41:25 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 21:12:13 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	war(t_data *data)
 {
-
-#ifdef ENCRYPT
 	update_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
-#endif
 
 #ifdef DEBUG
 	char de[] = "war\t \n";

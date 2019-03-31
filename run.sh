@@ -84,6 +84,9 @@ builtin_dump()
 	END_OF_DATA=$(objdump -d -M intel war | egrep -e "<end_of_data>:" | awk {'print $1'} | tr -dc '[0-9][a-f]')
 	printf "ENTRY_OFF :\t"
 	python -c "print ((0x$END_OF_DATA - 0x$JMP) - 1)"
+
+	printf "END ENCRYPT :\t"
+	objdump -d -M intel war | grep "<_rc4>:" | awk {'print $1'}
 }
 
 builtin_test()
