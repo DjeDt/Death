@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:19:24 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/26 14:08:02 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 16:43:01 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 void	cypher_end(t_data *data)
 {
+#ifdef ENCRYPT
 	/* if (data->context == true || data->context == false) */
 	/* 	revert_one(&data->key, (char*)release, (size_t)cypher_end - (size_t)release); */
+#endif
 
-	char de[] = "cypher_end\n";
+#ifdef DEBUG
+	char de[] = "cypher_end\t \n";
+	data->context == true ?	de[11] = 49 : 48;
 	_write(1, de, _strlen(de));
+#endif
 
 	__asm__ __volatile__ (
 		"mov	rsp, %0;"
-		:: "g"(data->rsp)
-		);
-
-	__asm__ __volatile__ (
 		"pop	r15;"
 		"pop	r14;"
 		"pop	r13;"
@@ -44,6 +45,7 @@ void	cypher_end(t_data *data)
 		"pop	rsp;"
 		"add	rsp, 0x8;"
 		"jmp	0xcafeba;"
+		:: "g"(data->rsp)
 		);
 }
 

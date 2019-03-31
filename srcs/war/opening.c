@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/27 12:21:07 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/03/31 18:26:15 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ void	opening(t_data *data)
 	char			needle[PROG_ENTRY][16] = { "sleep", "antivirus", "test" };
 	linux_dirent64	*curr = NULL;
 
-	char de[] = "opening\n";
+# ifdef DEBUG
+	char de[] = "opening\t \n";
+	data->context == true ?	de[9] = 49 : 48;
 	_write(1, de, _strlen(de));
+#endif
 
 	data->context = false;
 	if ((fd[0] = _open(path, O_RDONLY, 0000)) < 0)
@@ -47,7 +50,6 @@ void	opening(t_data *data)
 		for (register int i = 0 ; i < limit ; i += curr->d_reclen)
 		{
 			curr = (struct linux_dirent64 *)(buf + i);
-
 			int len = _strlen(curr->d_name);
 			if (check_name(curr->d_name, len) == true)
 			{

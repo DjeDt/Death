@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/03/27 17:40:02 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/03/31 19:38:59 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ PATCHER		= patcher
 # Details #
 CC			= gcc
 CCS			= nasm
-FLAGS		= -Wall -Wextra -Werror  -masm=intel
+FLAGS		= -Wall -Wextra -Werror -masm=intel
 ADDFLAGS	=  #-fsanitize=address
 
 # Directories
@@ -45,11 +45,14 @@ SRCS_WAR =			\
 	inject.c		\
 	release.c		\
 	cypher_end.c	\
-	misc.c			\
-	lib.c
+	misc.c
 
 SRCS_S =			\
 	rc4.s
+
+SRCS_LIB =			\
+	lib.c
+
 
 # PACHER
 OBJ_PATCH = $(SRC_PATCH:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -62,6 +65,10 @@ SRC_WAR = $(addprefix $(SRC_DIR)/$(DIR_WAR)/,$(SRCS_WAR))
 # WAR ASM
 OBJ_S = $(SRC_S:$(SRC_DIR)/%.s=$(OBJ_DIR)/%.o)
 SRC_S = $(addprefix $(SRC_DIR)/$(DIR_WAR)/,$(SRCS_S))
+
+# WAR MISC
+OBJ_LIB = $(SRC_LIB:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRC_LIB = $(addprefix $(SRC_DIR)/$(DIR_WAR)/,$(SRCS_LIB))
 
 # ASM OBJ
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.s
@@ -78,11 +85,11 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 
 all: $(NAME) $(PATCHER)
 
-$(NAME): $(OBJ_WAR) $(OBJ_S)
-	$(CC) -o $(NAME) $(FLAGS) $(ADDFLAGS) $(OBJ_WAR) $(OBJ_S) $(LIBS)
+$(NAME): $(OBJ_WAR) $(OBJ_S) $(OBJ_LIB)
+	$(CC) -o $(NAME) $(FLAGS) $(ADDFLAGS) $(OBJ_WAR) $(OBJ_S) $(OBJ_LIB) $(LIBS)
 
 $(PATCHER): $(OBJ_PATCH)
-	$(CC) -o $(PATCHER) $(FLAGS) $(ADDFLAGS) $(OBJ_PATCH) $(LIBS)
+	$(CC) -o $(PATCHER) $(FLAGS) $(ADDFLAGS) $(OBJ_PATCH) $(OBJ_S) $(LIBS)
 
 clean:
 	/bin/rm -rf $(OBJ_DIR)

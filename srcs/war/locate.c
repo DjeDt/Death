@@ -13,8 +13,11 @@ void	locate(t_data *data, t_directory *dir)
 	char			path[PATH_MAX] = {0};
 	linux_dirent64 *curr = NULL;
 
-	char de[] = "locate\n";
-	_write(1, de, 7);
+#ifdef DEBUG
+	char de[] = "locate\t \n";
+	data->context == true ?	de[7] = 49 : 48;
+	_write(1, de, _strlen(de));
+#endif
 
 	data->context = false;
 	if (_memcpy(path, dir->path[dir->entry], _strlen(dir->path[dir->entry])) != path)
