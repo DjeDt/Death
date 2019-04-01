@@ -1,35 +1,31 @@
 #include "war.h"
 #include <string.h>
 
-#define START_ADDR		0x11f1
-#define OPENING_ADDR	0x130d
-#define WAR_ADDR		0x1809
-#define LOCATE_ADDR		0x19da
-#define INSPECT_ADDR	0x1dc3
-#define INFECT_ADDR		0x2097
-#define INJECT_ADDR		0x23ca
-#define RELEASE_ADDR	0x2767
-#define CYPHEREND_ADDR	0x2863
-#define END_ADDR		0x2914
-#define ENDOFDATA_ADDR	0x316a
+#define START_ADDR		0x11fd
+#define OPENING_ADDR	0x131d
+#define WAR_ADDR		0x17ad
+#define LOCATE_ADDR		0x1957
+#define INSPECT_ADDR	0x1d40
+#define INFECT_ADDR		0x1fe4
+#define INJECT_ADDR		0x2320
+#define RELEASE_ADDR	0x2756
+#define CYPHEREND_ADDR	0x282b
+#define END_ADDR		0x28dc
+#define ENDOFDATA_ADDR	0x3282
 
-#define ENT_SIZE	OPENING_ADDR - START_ADDR
-#define F1_SIZE		WAR_ADDR - OPENING_ADDR
-#define F2_SIZE		LOCATE_ADDR - WAR_ADDR
-#define F3_SIZE		INSPECT_ADDR - LOCATE_ADDR
-#define F4_SIZE		INFECT_ADDR - INSPECT_ADDR
-#define F5_SIZE		INJECT_ADDR - INFECT_ADDR
-#define F6_SIZE		RELEASE_ADDR - INJECT_ADDR
-#define F7_SIZE		CYPHEREND_ADDR - RELEASE_ADDR
-#define F8_SIZE		F9_ADDR - END_ADDR
+#define START_SIZE		OPENING_ADDR - START_ADDR
+#define OPENING_SIZE	WAR_ADDR - OPENING_ADDR
+#define WAR_SIZE		LOCATE_ADDR - WAR_ADDR
+#define LOCATE_SIZE		INSPECT_ADDR - LOCATE_ADDR
+#define INSPECT_SIZE	INFECT_ADDR - INSPECT_ADDR
+#define INFECT_SIZE		INJECT_ADDR - INFECT_ADDR
+#define INJECT_SIZE		RELEASE_ADDR - INJECT_ADDR
+#define RELEASE_SIZE	CYPHEREND_ADDR - RELEASE_ADDR
+#define CYPHEREND_SIZE	END_ADDR - CYPHEREND_ADDR
 
-// start
-#define PACKER_KEY		0x11f1
-// opening
-#define PACKER_START	0x130d
-// _rc4 - opening
-#define END				0x2bf0
-#define PACKER_SIZE		END - PACKER_START
+// _rc4
+#define ENCRYPT_END		0x2bd0
+#define PACKER_SIZE		ENCRYPT_END - OPENING_ADDR
 
 char *ptr;
 
@@ -57,7 +53,7 @@ int main(void)
 {
 	int			fd;
 	char		*filename = "./war";
-	t_key		keychain = {0};
+	t_key		keychain = {0}; (void)keychain;
 	uint8_t		pack_key[KEY_SIZE];
 	struct stat	statbuf;
 
@@ -79,47 +75,54 @@ int main(void)
 		exit(0);
 	}
 
+	// moer encrypt key
+	memcpy(pack_key, ptr + ENCRYPT_END, KEY_SIZE);
+
+	// write permission
 	segment_write(ptr);
 
-	(void)keychain;
+	/* update_two(&keychain, ptr + RELEASE_ADDR, RELEASE_SIZE); */
+	/* revert_two(&keychain, ptr + CYPHEREND_ADDR, CYPHEREND_SIZE); */
+	/* printf("cypher_end: start at [%p] size : %d key = %lx\n", ptr + CYPHEREND_ADDR, CYPHEREND_SIZE, keychain.two); */
 
-	memcpy(pack_key, ptr + PACKER_KEY, KEY_SIZE);
-  	_rc4(pack_key, KEY_SIZE, (uint8_t*)ptr + PACKER_START, PACKER_SIZE);
 
-	// release -> cypher_end
-	/* update_one(&keychain, ptr + F6_ADDR, F6_SIZE); */
-	/* revert_one(&keychain, ptr + F7_ADDR, F7_SIZE); */
-	/* printf("cypher_end: start at [%p] size : %d key = %lx\n", ptr + F7_ADDR, F7_SIZE, keychain.one); */
+	/* update_one(&keychain, ptr + INJECT_ADDR, INJECT_SIZE); */
+	/* revert_one(&keychain, ptr + RELEASE_ADDR, RELEASE_SIZE); */
+	/* printf("release: start at [%p] size : %d key = %lx\n", ptr + RELEASE_ADDR, RELEASE_SIZE, keychain.one); */
 
-	/* // inject -> release */
-	/* update_two(&keychain, ptr + F5_ADDR, F5_SIZE); */
-	/* revert_two(&keychain, ptr + F6_ADDR, F6_SIZE); */
-	/* printf("release: start at [%p] size : %d key = %lx\n", ptr + F6_ADDR, F6_SIZE, keychain.two); */
 
-	/* // infect -> inject */
-	/* update_one(&keychain, ptr + F4_ADDR, F4_SIZE); */
-	/* revert_one(&keychain, ptr + F5_ADDR, F5_SIZE); */
-	/* printf("inject: start at [%p] size : %d key = %lx\n", ptr + F5_ADDR, F5_SIZE, keychain.one); */
+	/* update_two(&keychain, ptr + INFECT_ADDR, INFECT_SIZE); */
+	/* revert_two(&keychain, ptr + INJECT_ADDR, INJECT_SIZE); */
+	/* printf("inject: start at [%p] size : %d key = %lx\n", ptr + INJECT_ADDR, INJECT_SIZE, keychain.two); */
 
-	/* // inspect -> infect */
-	/* update_two(&keychain, ptr + F3_ADDR, F3_SIZE); */
-	/* revert_two(&keychain, ptr + F4_ADDR, F4_SIZE); */
-	/* printf("infect : start at [%p] size : %d : key = %lx \n", ptr + F4_ADDR, F4_SIZE, keychain.two); */
 
-	/* // locate -> inspect */
-	/* update_one(&keychain, ptr + F2_ADDR, F2_SIZE); */
-	/* revert_one(&keychain, ptr + F3_ADDR, F3_SIZE); */
-	/* printf("inspect : start at [%p] size : %d : key = %lx\n", ptr + F3_ADDR, F3_SIZE, keychain.one); */
+	/* update_one(&keychain, ptr + INSPECT_ADDR, INSPECT_SIZE); */
+	/* revert_one(&keychain, ptr + INFECT_ADDR, INFECT_SIZE); */
+	/* printf("infect: start at [%p] size : %d key = %lx\n", ptr + INFECT_ADDR, INFECT_SIZE, keychain.one); */
 
-	/* // war-> locate */
-	/* update_two(&keychain, ptr + F1_ADDR, F1_SIZE); */
-	/* revert_two(&keychain, ptr + F2_ADDR, F2_SIZE); */
-	/* printf("locate : start at [%p] size : %d key = %lx\n", ptr + F2_ADDR, F2_SIZE, keychain.two); */
 
-	/* // opening -> war */
-	/* update_one(&keychain, ptr + ENT_ADDR, ENT_SIZE); */
-	/* revert_one(&keychain, ptr + F1_ADDR, F1_SIZE); */
-	/* printf("war : start at [%p] size : %d key = %lx\n", ptr + F1_ADDR, F1_SIZE, keychain.one); */
+	/* update_two(&keychain, ptr + LOCATE_ADDR, LOCATE_SIZE); */
+	/* revert_two(&keychain, ptr + INSPECT_ADDR, INSPECT_SIZE); */
+	/* printf("inspect : start at [%p] size : %d : key = %lx \n", ptr + INSPECT_ADDR, INSPECT_SIZE, keychain.two); */
+
+
+	/* update_one(&keychain, ptr + WAR_ADDR, WAR_SIZE); */
+	/* revert_one(&keychain, ptr + LOCATE_ADDR, LOCATE_SIZE); */
+	/* printf("locate : start at [%p] size : %d : key = %lx\n", ptr + LOCATE_ADDR, LOCATE_SIZE, keychain.one); */
+
+
+	/* update_two(&keychain, ptr + OPENING_ADDR, OPENING_SIZE); */
+	/* revert_two(&keychain, ptr + WAR_ADDR, WAR_SIZE); */
+	/* printf("war : start at [%p] size : %d key = %lx\n", ptr + WAR_ADDR, WAR_SIZE, keychain.two); */
+
+
+	/* update_one(&keychain, ptr + START_ADDR, START_SIZE); */
+	/* revert_one(&keychain, ptr + OPENING_ADDR, OPENING_SIZE); */
+	/* printf("opening : start at [%p] size : %d key = %lx\n", ptr + OPENING_ADDR, OPENING_SIZE, keychain.one); */
+
+	// moar encrypt
+	_rc4(pack_key, KEY_SIZE, (uint8_t*)ptr + OPENING_ADDR, PACKER_SIZE);
+	printf("packer : key:\t%16s\n", pack_key);
 
 	write(fd, ptr, statbuf.st_size);
 	munmap(ptr, statbuf.st_size);

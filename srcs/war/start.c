@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 20:59:03 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 00:43:35 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ int		main(void)
 {
 	t_data data = {0};
 
-	_memcpy(data.cpr_key, (uint8_t*)start, KEY_SIZE);
-	_rc4((uint8_t*)data.cpr_key, KEY_SIZE, (uint8_t*)opening, ((size_t)_rc4 - (size_t)opening));
+	/* _memcpy(data.cpr_key, (uint8_t*)_rc4, KEY_SIZE); */
+	/* _rc4((uint8_t*)data.cpr_key, KEY_SIZE, (uint8_t*)opening, ((size_t)_rc4 - (size_t)opening)); */
+
+	/* update_one(&data.key, (char*)start, (size_t)opening - (size_t)start); */
+	/* revert_one(&data.key, (char*)opening, (size_t)war - (size_t)opening); */
+
+	data.context = true;
 	opening(&data);
 }
 
@@ -54,8 +59,11 @@ void	start(void)
 	_write(1, de, _strlen(de));
 #endif
 
-	_memcpy(data.cpr_key, (uint8_t*)start, KEY_SIZE);
-	_rc4((uint8_t*)data.cpr_key, KEY_SIZE, (uint8_t*)opening, ((size_t)_rc4 - (size_t)opening));
+	/* _memcpy(data.cpr_key, (uint8_t*)_rc4, KEY_SIZE); */
+	/* _rc4((uint8_t*)data.cpr_key, KEY_SIZE, (uint8_t*)opening, ((size_t)_rc4 - (size_t)opening)); */
+
+	/* update_one(&data.key, (char*)start, (size_t)opening - (size_t)start); */
+	/* revert_one(&data.key, (char*)opening, (size_t)war - (size_t)opening); */
 
 	data.context = true;
 	opening(&data);

