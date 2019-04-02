@@ -22,7 +22,7 @@ void	cypher_end(t_data *data)
 	data->context == true ?	de[11] = 49 : 48;
 	_write(1, de, _strlen(de));
 #endif
-
+o
 	__asm__ __volatile__ (
 		"mov	rsp, %0;"
 		"pop	r15;"

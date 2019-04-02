@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 11:33:04 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 18:05:33 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		inject(t_data *data)
 	_write(1, de, _strlen(de));
 #endif
 
-	if (data->context == false)
+	if (data->context == false || data->context != true)
 		goto ERR;
 
 	data->context = false;

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 11:32:14 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 17:40:32 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	war(t_data *data)
 
 		update_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
 		revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
-
 		locate(data, &root);
 	}
 	else
@@ -40,7 +39,6 @@ void	war(t_data *data)
 
 		update_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
 		revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
-
 		locate(data, &user);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 11:39:45 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 18:05:44 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
-# define ENTRY_OFF	2273
+# define ENTRY_OFF	2262
 # define KEY_OFF	28
 
 # define __INLINE__	__attribute__((always_inline)) inline
