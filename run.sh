@@ -56,10 +56,6 @@ builtin_create()
 	cp /bin/{ls,echo} /tmp/test
 	cp /bin/{ls,echo} /tmp/test2
 
-	if [ ! -f "war" ] || [ ! -f "patcher" ] ; then
-		make re && sync
-	fi
-
 	set +x
 }
 

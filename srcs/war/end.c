@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:19:24 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 16:32:31 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/03 19:27:34 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	cypher_end(t_data *data)
 {
-	if (data->context == true || data->context == false)
-		revert_one(&data->key, (char*)release, (size_t)cypher_end - (size_t)release);
+	revert_one(&data->key, (char*)release, (size_t)cypher_end - (size_t)release);
 
 #ifdef DEBUG
 	char de[] = "cypher_end\t \n";

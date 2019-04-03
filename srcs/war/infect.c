@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 17:40:57 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/03 18:18:38 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ ERR:
 
 	update_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
 	revert_two(&data->key, (char*)inject, (size_t)release - (size_t)inject);
-
 	inject(data);
 }

