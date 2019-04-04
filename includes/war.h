@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/03 19:39:31 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:05:38 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@
 # define ROOT_ENTRY	4
 # define PROG_ENTRY	3
 # define INST_ENTRY 3
-# define KEY_SIZE	16
+# define KEY_SIZE	64
 
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
-# define ENTRY_OFF	2261
+# define ENTRY_OFF	2275
 # define KEY_OFF	28
 
-# define __INLINE__	__attribute__((always_inline)) inline
+# define __INLINE__	__attribute__((__always_inline__)) inline
 # define __PACKED__ __attribute__ ((__packed__))
 
 // debug
@@ -122,8 +122,7 @@ void			inspect(t_data *data, char *path);
 void			infect(t_data *data);
 void			inject(t_data *data);
 void			release(t_data *data);
-void			cypher_end(t_data *data);
-void			end(void);
+void			end(t_data *data);
 
 /*
 **	Misc

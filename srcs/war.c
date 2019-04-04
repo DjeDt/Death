@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/03 18:29:24 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 11:47:13 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	war(t_data *data)
 {
+
 	revert_one(&data->key, (char*)opening, (size_t)war - (size_t)opening);
 
 #ifdef DEBUG

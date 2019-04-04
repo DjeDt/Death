@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/03 19:39:17 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 13:48:53 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void		release(t_data *data)
 	_close(data->bin.fd);
 	_munmap(data->bin.map, data->bin.size);
 
-	/* update_two(&data->key, (char*)release, (size_t)cypher_end - (size_t)release); */
-	/* revert_two(&data->key, (char*)cypher_end, (size_t)end - (size_t)cypher_end); */
+	/* update_two(&data->key, (char*)release, (size_t)end - (size_t)release); */
+	/* revert_two(&data->key, (char*)end, (size_t)update_one - (size_t)end); */
 
-	cypher_end(data);
+	end(data);
 }

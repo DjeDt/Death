@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lib.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/04 14:57:36 by ddinaut           #+#    #+#             */
+/*   Updated: 2019/04/04 14:57:37 by ddinaut          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "war.h"
 
 void	*_memcpy(void *d, void *s, size_t size)
@@ -62,7 +74,7 @@ bool	check_name(char *str, int len)
 	return (true);
 }
 
-bool     generate_key(uint8_t *key, size_t size)
+bool	generate_key(uint8_t *key, size_t size)
 {
 	int     fd;
 	char	path[] = "/dev/random";
@@ -261,9 +273,4 @@ int		_write(int fd, const void *buf, size_t len)
 		: "g"(fd), "g"(buf), "g"(len)
 		);
 	return (ret);
-}
-
-void	end_of_data(void)
-{
-	return ;
 }

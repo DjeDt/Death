@@ -9,6 +9,8 @@ _rc4:
 	mov		r8d, 0x0
 
 j1:
+								; 	push	rax
+								;	pop		rax
 	mov		byte [rsp + r8 * 1 + 0x88], r8b
 	mov		eax, r8d
 	cdq
@@ -48,9 +50,15 @@ j2:
 	lea		eax, [rcx - 0x1]
 	lea		rdi, [r9 + rax * 1 +0x1]
 	xor		edx, edx
+	push	rax
+	pop		rax
 	xor		eax, eax
+	push	rax
+	pop		rax
 
 j4:
+	push	rax
+	pop		rax
 	add 	rax, 0x1
 	movzx 	eax, al
 	movzx 	ecx, byte [rsp + rax * 1 + 0x88]
@@ -66,6 +74,8 @@ j4:
 	jne		j4
 
 j3:
+	push	rax
+	pop		rax
 	add		rsp, 0x188
 	leave
 	ret

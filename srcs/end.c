@@ -6,18 +6,18 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:19:24 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/03 19:27:34 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 12:10:46 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
-void	cypher_end(t_data *data)
+void	end(t_data *data)
 {
-	revert_one(&data->key, (char*)release, (size_t)cypher_end - (size_t)release);
+	revert_one(&data->key, (char*)release, (size_t)end - (size_t)release);
 
 #ifdef DEBUG
-	char de[] = "cypher_end\t \n";
+	char de[] = "end\t \n";
 	data->context == true ?	de[11] = 49 : 48;
 	_write(1, de, _strlen(de));
 #endif
@@ -44,9 +44,4 @@ void	cypher_end(t_data *data)
 		"jmp	0xcafeba;"
 		:: "g"(data->rsp)
 		);
-}
-
-void	end(void)
-{
-	return ;
 }
