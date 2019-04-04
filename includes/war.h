@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 16:25:36 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:26:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define __PACKED__ __attribute__ ((__packed__))
 
 # define VERSION	"1.0"
-# define CREATED_BY	"War version "VERSION" (c)oded by Jle-quel & DjeDt"
+# define CREATED_BY	"War version "VERSION" (c)oded by Jle-Quel & DjeDt"
 # define CREATE_SZ	43
 // debug
 # define DEBUG
