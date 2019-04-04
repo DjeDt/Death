@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 16:05:38 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:09:58 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define USER_ENTRY	2
 # define ROOT_ENTRY	4
 # define PROG_ENTRY	3
-# define INST_ENTRY 3
+# define OC_ENTRY	8
 # define KEY_SIZE	64
 
 # define BUFF_SIZE	0x1000

