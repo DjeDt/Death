@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 16:09:58 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:25:36 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,15 @@
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
-# define ENTRY_OFF	2275
+# define ENTRY_OFF	2288
 # define KEY_OFF	28
 
 # define __INLINE__	__attribute__((__always_inline__)) inline
 # define __PACKED__ __attribute__ ((__packed__))
 
+# define VERSION	"1.0"
+# define CREATED_BY	"War version "VERSION" (c)oded by Jle-quel & DjeDt"
+# define CREATE_SZ	43
 // debug
 # define DEBUG
 
