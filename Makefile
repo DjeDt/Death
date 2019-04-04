@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/04/03 17:12:19 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/04/04 11:33:20 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,7 +22,7 @@ ADDFLAGS	=  #-fsanitize=address
 # Directories
 OBJ_DIR		= .obj
 SRC_DIR		= srcs
-DIR_WAR		= war
+#kDIR_WAR		= war
 DIR_PATCH	= patcher
 
 INC_DIR		= includes/
@@ -40,25 +40,26 @@ SRCS_WAR =			\
 	inject.c		\
 	release.c		\
 	end.c			\
-	misc.c
+	misc.c			\
+	lib.c
 
 SRCS_S =			\
 	rc4.s
 
 SRCS_LIB =			\
-	lib.c
+	end_of_data.c
 
 # WAR
 OBJ_WAR = $(SRC_WAR:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-SRC_WAR = $(addprefix $(SRC_DIR)/$(DIR_WAR)/,$(SRCS_WAR))
+SRC_WAR = $(addprefix $(SRC_DIR)/,$(SRCS_WAR))
 
 # WAR ASM
 OBJ_S = $(SRC_S:$(SRC_DIR)/%.s=$(OBJ_DIR)/%.o)
-SRC_S = $(addprefix $(SRC_DIR)/$(DIR_WAR)/,$(SRCS_S))
+SRC_S = $(addprefix $(SRC_DIR)/,$(SRCS_S))
 
 # WAR MISC
 OBJ_LIB = $(SRC_LIB:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-SRC_LIB = $(addprefix $(SRC_DIR)/$(DIR_WAR)/,$(SRCS_LIB))
+SRC_LIB = $(addprefix $(SRC_DIR)/,$(SRCS_LIB))
 
 # ASM OBJ
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.s
