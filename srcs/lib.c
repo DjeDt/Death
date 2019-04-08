@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:57:36 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 14:57:37 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/08 18:22:55 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,56 @@ bool	check_name(char *str, int len)
 	return (true);
 }
 
-bool	generate_key(uint8_t *key, size_t size)
-{
-	int     fd;
-	char	path[] = "/dev/random";
+/* bool	generate_key(uint8_t *key, size_t size) */
+/* { */
+/* 	int     fd; */
+/* 	char	path[] = "/dev/random"; */
 
-	fd = _open(path, O_RDONLY, 0000);
-	if (fd < 0)
-		return (false);
-	if (_read(fd, key, size) == -1)
-	{
-		_close(fd);
-		return (false);
-	}
-	_close(fd);
-	return (true);
+/* 	fd = _open(path, O_RDONLY, 0000); */
+/* 	if (fd < 0) */
+/* 		return (false); */
+/* 	if (_read(fd, key, size) == -1) */
+/* 	{ */
+/* 		_close(fd); */
+/* 		return (false); */
+/* 	} */
+/* 	_close(fd); */
+/* 	return (true); */
+/* } */
+
+
+pid_t _fork(void)
+{
+	pid_t ret = 0;
+
+	__asm__ __volatile__ (
+		"mov rax, 57\n"
+		"syscall\n"
+		);
+	__asm__ __volatile__ (
+		"mov %0, eax\n"
+		: "=r"(ret)
+		);
+	return (ret);
+}
+
+int		_execve(const char *filename, char *const argv[], char *const envp[])
+{
+	int ret = 0;
+
+	__asm__ __volatile__ (
+		"mov rdi, %0\n"
+		"mov rsi, %1\n"
+		"mov rdx, %2\n"
+		"mov rax, 59\n"
+		"syscall\n"
+		:: "g"(filename), "g"(argv), "g"(envp)
+		);
+	__asm__ __volatile__ (
+		"mov %0, eax\n"
+		: "=r"(ret)
+		);
+	return (ret);
 }
 
 void    __exit(int status)

