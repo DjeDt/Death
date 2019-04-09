@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:47:53 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 21:49:08 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		release(t_data *data)
 
 	pid_t child;
 	char *av[2] = {data->name, 0};
-
 	child = _fork();
 	if (child == 0)
 	{

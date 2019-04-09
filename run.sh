@@ -82,7 +82,7 @@ builtin_dump()
 {
 	objdump -d -M intel war | egrep -e "<start>:|<opening>:|<war>:|<locate>:|<inspect>:|<infect>:|<inject>:|<release>:|<cypher_end>:|<end>:|<end_of_data>:|cafeba"
 
-	JMP=$(objdump -d -M intel war | egrep -e "cafeba" | awk {'print $1'} | tr -dc '[0-9][a-f]')
+	JMP=$(objdump -d -M intel war | egrep -e "e9 5a 05 00 00" | awk {'print $1'} | tr -dc '[0-9][a-f]')
 	END_OF_DATA=$(objdump -d -M intel war | egrep -e "<end_of_data>:" | awk {'print $1'} | tr -dc '[0-9][a-f]')
 	printf "ENTRY_OFF :\t"
 	python -c "print ((0x$END_OF_DATA - 0x$JMP) - 1)"

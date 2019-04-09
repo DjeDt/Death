@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:46:05 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 15:25:47 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	opening(t_data *data)
 			int len = _strlen(curr->d_name);
 			if (check_name(curr->d_name, len) == true)
 			{
-
 				_memcpy(path + 6, curr->d_name, len);
 				path[6 + len] = '\0';
 				if ((fd[1] = _open(path, O_RDONLY, 0000)) < 0)

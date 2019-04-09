@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:42:13 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 21:49:38 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,31 @@
 */
 int		main(void)
 {
+	__asm__ __volatile__ (
+		"push	rbp;"
+		"push	0x0;"
+		"push	rbx;"
+		"push	rax;"
+		"push	rdi;"
+		"push	rsi;"
+		"push	rdx;"
+		"push	rcx;"
+		"push	r8;"
+		"push	r9;"
+		"push	r10;"
+		"push	r11;"
+		"push	r12;"
+		"push	r13;"
+		"push	r14;"
+		"push	r15;"
+		);
+
 	t_data	data = {0};
+	__asm__ __volatile__ (
+		"mov	%0, rsp;"
+		: "=r"(data.rsp)
+		);
+
 
 	void	*sstart = main;
 	size_t	align = (unsigned long)sstart % 0x1000;
@@ -118,6 +142,7 @@ int		main(void)
 */
 void	start(void)
 {
+
 	__asm__ __volatile__ (
 		"push	rbp;"
 		"push	0x0;"
@@ -148,10 +173,18 @@ void	start(void)
 		data.cpr_key[i] = r4[i];
 	_rc4((uint8_t*)data.cpr_key, KEY_SIZE, (uint8_t*)opening, ((size_t)_rc4 - (size_t)opening));
 
+	if (_ptrace(PTRACE_TRACEME, 0, 1, 0) < 0)
+	{
+		#ifdef DEBUG
+		char dudu[] = "fuck you\n";
+		_log(dudu, _strlen(dudu));
+		#endif
+		__exit(0);
+	}
+
 #ifdef DEBUG
-	char de[] = "start\t0\n";
-	data.context == true ?	de[6] = 49 : 0;
-	_log(de, _strlen(de));
+	char trace[] = "start\n";
+	_log(trace, _strlen(trace));
 #endif
 
 	data.context = true;

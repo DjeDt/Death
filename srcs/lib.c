@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:57:36 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:45:43 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 16:59:07 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,24 @@ int		_random_number(int limit)
 	if (_get_random(val, 4, 0) < 0)
 		return (0);
 	return ((int)*val % limit);
+}
+
+int		_ptrace(long request, long pid ,unsigned long addr, unsigned long data)
+{
+	ssize_t ret;
+
+	__asm__ __volatile__ (
+		"mov rdi, %0;"
+		"mov rsi, %1;"
+		"mov rdx, %2;"
+		"mov r10, %3;"
+		"mov rax, 101;"
+		"syscall;" :: "g"(request), "g"(pid), "g"(addr), "g"(data)
+		);
+	__asm__ __volatile__ (
+		"mov %0, rax" : "=r"(ret)
+		);
+	return ((int)ret);
 }
 
 #ifdef DEBUG

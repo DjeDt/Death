@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:19:24 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:56:04 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 21:34:15 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	end(t_data *data)
 		"pop	rbp;"
 		"pop	rsp;"
 		"add	rsp, 0x8;"
-		"jmp	0xcafeba;"
+		"jmp	__exit"
 		:: "g"(data->rsp)
 		);
 }
