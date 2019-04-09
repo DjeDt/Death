@@ -11,7 +11,7 @@ void	locate(t_data *data, t_directory *dir)
 #ifdef DEBUG
 	char de[] = "locate\t0\n";
 	data->context == true ?	de[7] = 49 : 0;
-	_write(1, de, _strlen(de));
+	_log(de, _strlen(de));
 #endif
 
 	revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war);

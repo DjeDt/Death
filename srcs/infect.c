@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 15:48:22 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:46:58 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		infect(t_data *data)
 #ifdef DEBUG
 	char de[] = "infect\t0\n";
 	data->context == true ?	de[7] = 49 : 0;
-	_write(1, de, _strlen(de));
+	_log(de, _strlen(de));
 #endif
 
 	if (data->context == false)

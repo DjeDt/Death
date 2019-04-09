@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 18:32:09 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:46:05 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	opening(t_data *data)
 #ifdef DEBUG
 	char de[] = "opening\t0\n";
 	data->context == true ?	de[8] = 49 : 0;
-	_write(1, de, _strlen(de));
+	_log(de, _strlen(de));
 #endif
 
 	int				fd[3];
@@ -74,9 +74,9 @@ void	opening(t_data *data)
 						{
 #ifdef DEBUG
 							char tutu[] = "proccess :\t";
-							_write(1, tutu, _strlen(tutu));
-							_write(1, &prog[k], _strlen(&prog[k]));
-							_write(1, &de[9], 1);
+							_log(tutu, _strlen(tutu));
+							_log(&prog[k], _strlen(&prog[k]));
+							_log(&de[9], 1);
 #endif
 
 							_close(fd[2]);

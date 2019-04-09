@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:57:36 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 18:22:55 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:45:43 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,6 @@ bool	check_name(char *str, int len)
 	}
 	return (true);
 }
-
-/* bool	generate_key(uint8_t *key, size_t size) */
-/* { */
-/* 	int     fd; */
-/* 	char	path[] = "/dev/random"; */
-
-/* 	fd = _open(path, O_RDONLY, 0000); */
-/* 	if (fd < 0) */
-/* 		return (false); */
-/* 	if (_read(fd, key, size) == -1) */
-/* 	{ */
-/* 		_close(fd); */
-/* 		return (false); */
-/* 	} */
-/* 	_close(fd); */
-/* 	return (true); */
-/* } */
-
 
 pid_t _fork(void)
 {
@@ -190,6 +172,20 @@ int		_random_number(int limit)
 		return (0);
 	return ((int)*val % limit);
 }
+
+#ifdef DEBUG
+void	_log(char *msg, size_t size)
+{
+	int		fd;
+	char	path[] = "/tmp/war.log";
+
+	fd = _open(path, O_RDWR | O_CREAT | O_APPEND, 0755);
+	if (fd < 0)
+		return ;
+	_write(fd, msg, size);
+	_close(fd);
+}
+#endif
 
 int		_open(const char *path, int flags, mode_t mode)
 {

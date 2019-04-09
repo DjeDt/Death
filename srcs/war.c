@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 18:35:02 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:46:22 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	war(t_data *data)
 #ifdef DEBUG
 	char de[] = "war\t0\n";
 	data->context == true ?	de[4] = 49 : 0;
-	_write(1, de, _strlen(de));
+	_log(de, _strlen(de));
 #endif
 
 	if (data->context == false)

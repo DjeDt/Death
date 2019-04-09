@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 15:39:47 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:42:13 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,12 +151,11 @@ void	start(void)
 #ifdef DEBUG
 	char de[] = "start\t0\n";
 	data.context == true ?	de[6] = 49 : 0;
-	_write(1, de, _strlen(de));
+	_log(de, _strlen(de));
 #endif
 
 	data.context = true;
 	update_one(&data.key, (char*)start, (size_t)opening - (size_t)start);
 	revert_one(&data.key, (char*)opening, (size_t)war - (size_t)opening);
-
 	opening(&data);
 }

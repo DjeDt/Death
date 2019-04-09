@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 18:37:12 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:47:53 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		release(t_data *data)
 #ifdef DEBUG
 	char de[] = "release\t0\n";
 	data->context == true ?	de[8] = 49 : 0;
-	_write(1, de, _strlen(de));
+	_log(de, _strlen(de));
 #endif
 
 	_close(data->bin.fd);

