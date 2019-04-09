@@ -38,8 +38,13 @@ builtin_create()
 		mkdir "/tmp/test2"
 	fi
 
+	if [ -f /tmp/war.log ] ; then
+		rm -f /tmp/war.log
+	fi
+
 	rm -f /tmp/test/*
 	rm -f /tmp/test2/*
+
 	gcc tbin/main.c -o tbin/a.out
 	gcc tbin/antivirus.c -o tbin/antivirus
 
@@ -56,6 +61,7 @@ builtin_create()
 	cp /bin/{ls,echo} /tmp/test
 	cp /bin/{ls,echo} /tmp/test2
 
+	touch /tmp/war.log
 	set +x
 }
 
