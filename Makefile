@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/04/04 17:16:13 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/04/10 15:04:22 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,6 +32,7 @@ INCLUDES	= -I $(INC_DIR)
 
 SRCS_WAR =			\
 	start.c			\
+	antidebug.c		\
 	opening.c		\
 	war.c			\
 	locate.c		\

