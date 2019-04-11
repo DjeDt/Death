@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/10 23:35:23 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/11 12:38:03 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 /* Define */
 
 // debug
-# define DEBUG
+//# define DEBUG
 
 # define SIGNATURE	0x216948	// 'Hi!'
 
@@ -49,12 +49,10 @@
 # define PROG_INFO	512
 
 # ifdef DEBUG
-#  define ENTRY_OFF	2471
+#  define ENTRY_OFF	2461
 # else
-#  define ENTRY_OFF 218
+#  define ENTRY_OFF	2453
 # endif
-
-# define KEY_OFF	28
 
 # define __INLINE__	__attribute__((__always_inline__)) inline
 # define __PACKED__ __attribute__ ((__packed__))

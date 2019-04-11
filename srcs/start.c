@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/10 18:19:43 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/11 11:29:42 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int		main(void)
 /* #ifdef DEBUG */
 /* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "opening", opening, (size_t)war - (size_t)opening, data.key.two); */
 /* #endif */
-
 
 /* 	// (not necessary) antidebug */
 /* 	update_one(&data.key, (char*)start, (size_t)antidebug - (size_t)start); */

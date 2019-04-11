@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/10 23:09:11 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/11 11:32:57 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ __INLINE__ bool read_entry(int fd)
 				count2++;
 			if (_strncmp(needle[count], &prog[count2], _strlen(needle[count])) == 0)
 			{
-
 				#ifdef DEBUG
 				char c = '\n';
 				char tutu[] = "\tproccess :\t";

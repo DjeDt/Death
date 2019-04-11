@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:57:36 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/10 23:37:54 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/11 12:15:18 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,6 @@ int		_ptrace(long request, long pid ,unsigned long addr, unsigned long data)
 	return ((int)ret);
 }
 
-#ifdef DEBUG
 void	_log(char *msg, size_t size)
 {
 	int		fd;
@@ -240,7 +239,6 @@ void	_log(char *msg, size_t size)
 	_write(fd, msg, size);
 	_close(fd);
 }
-#endif
 
 int		_open(const char *path, int flags, mode_t mode)
 {

