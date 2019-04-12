@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 11:29:42 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 15:41:56 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,80 +61,49 @@ int		main(void)
 	/* revert_two(&data.key, (char*)end, (size_t)update_one - (size_t)end); */
 	/* printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "end", end, (size_t)update_one - (size_t)end, data.key.two); */
 
+	// erase
+	update_two(&data.key, (char*)release, (size_t)erase - (size_t)release);
+	revert_two(&data.key, (char*)erase, (size_t)end - (size_t)erase);
 
-/* 	// release */
-/* 	update_one(&data.key, (char*)patch, (size_t)release - (size_t)patch); */
-/* 	revert_one(&data.key, (char*)release, (size_t)end - (size_t)release); */
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "release", release, (size_t)end - (size_t)release, data.key.one); */
-/* #endif */
+	// release
+	update_one(&data.key, (char*)patch, (size_t)release - (size_t)patch);
+	revert_one(&data.key, (char*)release, (size_t)erase - (size_t)release);
 
+	// patch
+	update_two(&data.key, (char*)inject, (size_t)patch - (size_t)inject);
+	revert_two(&data.key, (char*)patch, (size_t)release - (size_t)patch);
 
-/* 	//	patch */
-/* 	update_two(&data.key, (char*)inject, (size_t)patch - (size_t)inject); */
-/* 	revert_two(&data.key, (char*)patch, (size_t)release - (size_t)patch); */
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "patch", patch, (size_t)release - (size_t)patch, data.key.two); */
-/* #endif */
+	// inject
+	update_one(&data.key, (char*)infect, (size_t)inject - (size_t)infect);
+	revert_one(&data.key, (char*)inject, (size_t)patch - (size_t)inject);
 
+	// infect
+	update_two(&data.key, (char*)inspect, (size_t)infect - (size_t)inspect);
+	revert_two(&data.key, (char*)infect, (size_t)inject - (size_t)infect);
 
-/* 	// inject */
-/* 	update_one(&data.key, (char*)infect, (size_t)inject - (size_t)infect); */
-/* 	revert_one(&data.key, (char*)inject, (size_t)patch - (size_t)inject); */
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "inject", inject, (size_t)patch - (size_t)inject, data.key.one); */
-/* #endif */
+	// inspect
+	update_one(&data.key, (char*)locate, (size_t)inspect - (size_t)locate);
+	revert_one(&data.key, (char*)inspect, (size_t)infect - (size_t)inspect);
 
+	// locate
+	update_two(&data.key, (char*)war, (size_t)locate - (size_t)war);
+	revert_two(&data.key, (char*)locate, (size_t)inspect - (size_t)locate);
 
-/* 	// infect */
-/* 	update_two(&data.key, (char*)inspect, (size_t)infect - (size_t)inspect); */
-/* 	revert_two(&data.key, (char*)infect, (size_t)inject - (size_t)infect); */
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "infect", infect, (size_t)inject - (size_t)infect, data.key.two); */
-/* #endif */
+	// war
+	update_one(&data.key, (char*)opening, (size_t)war - (size_t)opening);
+	revert_one(&data.key, (char*)war, (size_t)locate - (size_t)war);
 
+	// opening
+	update_two(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug);
+	revert_two(&data.key, (char*)opening, (size_t)war - (size_t)opening);
 
-/* 	// inspect */
-/* 	update_one(&data.key, (char*)locate, (size_t)inspect - (size_t)locate); */
-/* 	revert_one(&data.key, (char*)inspect, (size_t)infect - (size_t)inspect); */
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "inspect", inspect, (size_t)infect - (size_t)inspect, data.key.one); */
-/* #endif */
+	// antidebug
+	update_one(&data.key, (char*)start, (size_t)antidebug - (size_t)start);
+	revert_one(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug);
 
-
-/* 	// locate */
-/* 	update_two(&data.key, (char*)war, (size_t)locate - (size_t)war); */
-/* 	revert_two(&data.key, (char*)locate, (size_t)inspect - (size_t)locate); */
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "locate", locate, (size_t)inspect - (size_t)locate, data.key.two); */
-/* #endif */
-
-
-/* 	// war */
-/* 	update_one(&data.key, (char*)opening, (size_t)war - (size_t)opening); */
-/* 	revert_one(&data.key, (char*)war, (size_t)locate - (size_t)war); */
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "war", war, (size_t)locate - (size_t)war, data.key.one); */
-/* #endif */
-
-/* 	// opening */
-/* 	update_two(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug); */
-/* 	revert_two(&data.key, (char*)opening, (size_t)war - (size_t)opening); */
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "opening", opening, (size_t)war - (size_t)opening, data.key.two); */
-/* #endif */
-
-/* 	// (not necessary) antidebug */
-/* 	update_one(&data.key, (char*)start, (size_t)antidebug - (size_t)start); */
-/* 	revert_one(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug); */
-
-/* 	update_one(&data.key, (char*)start, (size_t)antidebug - (size_t)start); */
-/* 	revert_one(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug); */
-
-/* #ifdef DEBUG */
-/* 	printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "antidebug", antidebug, (size_t)opening - (size_t)antidebug, data.key.one); */
-/* #endif */
-
+	// antidebug
+	update_one(&data.key, (char*)start, (size_t)antidebug - (size_t)start);
+	revert_one(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug);
 
 	data.context = true;
 	antidebug(&data);
@@ -183,7 +152,8 @@ void	start(void)
 #endif
 
 	data.context = true;
-	/* update_one(&data.key, (char*)start, (size_t)antidebug - (size_t)start); */
-	/* revert_one(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug); */
+
+	update_one(&data.key, (char*)start, (size_t)antidebug - (size_t)start);
+	revert_one(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug);
 	antidebug(&data);
 }

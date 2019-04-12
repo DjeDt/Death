@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 15:05:51 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 15:36:33 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define PROG_INFO	512
 
 # ifdef DEBUG
-#  define ENTRY_OFF	2469
+#  define ENTRY_OFF	2461
 # else
 #  define ENTRY_OFF	2453
 # endif

