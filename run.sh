@@ -11,6 +11,7 @@ Error: usage : ./run.sh <arg>
 \tcreate [name:tag] : create tmp dir and cpy bin
 \tsearch            : search for infected binaries
 \tdump              : look for war func address
+\tfuzz   [bin]      : corrupt binary and fuzz war
 "
 
 RESET="\e[39m"
@@ -63,6 +64,29 @@ builtin_create()
 
 	touch /tmp/war.log
 	set +x
+}
+
+builtin_fuzz()
+{
+	rm -rf /tmp/test/*
+	rm -rf /tmp/test2
+
+	if [ $1 ] ; then
+		cp "$1" tbin/a.out
+	else
+		gcc tbin/main.c -o tbin/a.out
+	fi
+
+	LEN=$(stat --printf="%s" tbin/a.out)
+	COUNT=0
+	while [ $COUNT -lt $LEN ] ; do
+		printf "Corrupted n $COUNT:\n"
+		cp tbin/a.out /tmp/test/corrupted.out
+		dd if=/dev/urandom count=1 bs=1 seek=$COUNT of=/tmp/test/corrupted.out conv=notrunc status=none
+		./war
+		COUNT=$[$COUNT+1]
+		printf "\n"
+	done
 }
 
 builtin_search()
@@ -125,6 +149,9 @@ main()
 			;;
 		"test")
 			builtin_test $@
+			;;
+		"fuzz")
+			builtin_fuzz $@
 			;;
 		"help"|*)
 			builtin_usage
