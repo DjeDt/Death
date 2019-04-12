@@ -9,9 +9,8 @@ void	locate(t_data *data, t_directory *dir)
 {
 
 #ifdef DEBUG
-	char de[] = "locate\t\t0\n";
-	data->context == true ?	de[8] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "locate\t\t";
+	_log(log, NULL, 8, data->context);
 #endif
 
 	revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war);

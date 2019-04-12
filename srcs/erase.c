@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:20:56 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 15:36:19 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:42:14 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	erase(t_data *data)
 	revert_one(&data->key, (char*)release, (size_t)erase - (size_t)release);
 
 #ifdef DEBUG
-	char de[] = "erase\t\t0\n";
-	data->context == true ?	de[7] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "erase\t\t\t";
+	_log(log, NULL,  7, data->context);
 #endif
 
 	char	*start = (char*)war;

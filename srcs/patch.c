@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 17:02:59 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 17:19:10 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:35:07 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	patch(t_data *data, uint8_t *map, size_t size)
 {
 
 #ifdef DEBUG
-	char de[] = "patch\t\t0\n";
-	data->context == true ?	de[7] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "patch\t\t";
+	_log(log, NULL, 7, data->context);
 #endif
 
 	revert_one(&data->key, (char*)inject, (size_t)patch - (size_t)inject);

@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/04/12 13:23:41 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/04/12 20:49:40 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ NAME		= war
 CC			= gcc
 CCS			= nasm
 FLAGS		= -Wall -Wextra -Werror -masm=intel
-ADDFLAGS	=  #-fsanitize=address
+ADDFLAGS	= -D DEBUG # -g3 -fsanitize=address
 
 # Directories
 OBJ_DIR		= .obj
@@ -81,6 +81,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_WAR) $(OBJ_S) $(OBJ_LIB)
 	$(CC) -o $(NAME) $(FLAGS) $(ADDFLAGS) $(OBJ_WAR) $(OBJ_S) $(OBJ_LIB) $(LIBS)
+	@echo -n "Hi!" | dd count=3 bs=1 seek=9 of=$(NAME) conv=notrunc status=none
 
 clean:
 	/bin/rm -rf $(OBJ_DIR)

@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 17:19:31 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:35:36 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void		release(t_data *data)
 	revert_two(&data->key, (char*)patch, (size_t)release - (size_t)patch);
 
 #ifdef DEBUG
-	char de[] = "release\t\t0\n";
-	data->context == true ?	de[9] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "release\t\t";
+	_log(log, NULL, 9, data->context);
 #endif
 
 	_close(data->bin.fd);

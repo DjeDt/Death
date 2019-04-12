@@ -39,12 +39,10 @@ builtin_create()
 		mkdir "/tmp/test2"
 	fi
 
-	if [ -f /tmp/war.log ] ; then
-		rm -f /tmp/war.log
-	fi
-
 	rm -f /tmp/test/*
 	rm -f /tmp/test2/*
+
+	echo "" > /tmp/war.log
 
 	gcc tbin/main.c -o tbin/a.out
 	gcc tbin/antivirus.c -o tbin/antivirus
@@ -62,7 +60,9 @@ builtin_create()
 	cp /bin/{ls,echo} /tmp/test
 	cp /bin/{ls,echo} /tmp/test2
 
-	touch /tmp/war.log
+	touch /tmp/test/junk_1
+	touch /tmp/test2/junk_1
+
 	set +x
 }
 
@@ -106,7 +106,7 @@ builtin_dump()
 {
 	objdump -d -M intel war | egrep -e "<start>:|<opening>:|<war>:|<locate>:|<inspect>:|<infect>:|<inject>:|<release>:|<cypher_end>:|<end>:|<end_of_data>:|cafeba"
 
-	TEST=$(grep "//# define DEBUG" includes/war.h)
+	TEST=$(grep "#-D DEBUG" Makefile)
 	if [ -z "$TEST" ] ; then
 		echo "DEBUG"
 		JMP=$(objdump -d -M intel war | egrep -e "e9 a0 05 00 00" | awk {'print $1'} | tr -dc '[0-9][a-f]')
@@ -127,7 +127,7 @@ builtin_dump()
 builtin_test()
 {
 	# only test for antivirus
-	sleep 20 &
+	sleep 5 &
 	./war
 }
 

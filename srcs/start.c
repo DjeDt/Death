@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 15:41:56 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:43:40 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,8 @@ void	start(void)
 	_rc4((uint8_t*)data.cpr_key, KEY_SIZE, (uint8_t*)antidebug, ((size_t)_rc4 - (size_t)antidebug));
 
 #ifdef DEBUG
-	char trace[] = "start\n";
-	_log(trace, _strlen(trace));
+	char log[] = "\nstart\t\t";
+	_log(log, NULL, 8, 0);
 #endif
 
 	data.context = true;

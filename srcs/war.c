@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 15:23:14 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:27:16 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	war(t_data *data)
 	revert_two(&data->key, (char*)opening, (size_t)war - (size_t)opening);
 
 #ifdef DEBUG
-	char de[] = "war\t\t0\n";
-	data->context == true ?	de[5] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "war\t\t";
+	_log(log, NULL, 5, data->context);
 #endif
 
 	if (data->context == false)

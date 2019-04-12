@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:19:24 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/10 18:21:27 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:41:30 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	end(t_data *data)
 	/* 	revert_one(&data->key, (char*)release, (size_t)end - (size_t)release); */
 
 #ifdef DEBUG
-	char de[] = "end\t \n";
-	data->context == true ?	de[11] = 49 : 48;
-	_log(de, _strlen(de));
-	_log(&de[5], 1);
+	char log[] = "end\t\t";
+	_log(log, NULL, 5, data->context);
 #endif
 
 	__asm__ __volatile__ (

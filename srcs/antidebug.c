@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 13:37:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 15:20:36 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:27:53 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ void	antidebug(t_data *data)
 {
 
 #ifdef DEBUG
-	char de[] = "antidebug\t0\n";
-	data->context == true ?	de[10] = 49 : 0;
-	_log(de, _strlen(de));
+	char log[] = "antidebug\t";
+	_log(log, NULL, 10, data->context);
 #endif
 
 	pid_t	child = 0;

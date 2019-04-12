@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:57:36 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/11 12:15:18 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:44:59 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,17 +228,31 @@ int		_ptrace(long request, long pid ,unsigned long addr, unsigned long data)
 	return ((int)ret);
 }
 
-void	_log(char *msg, size_t size)
+#ifdef DEBUG
+
+void	_log(char *msg, char *name, size_t msgsize, size_t context)
 {
 	int		fd;
+	char	c = context + 48;
 	char	path[] = "/tmp/war.log";
 
 	fd = _open(path, O_RDWR | O_CREAT | O_APPEND, 0755);
 	if (fd < 0)
 		return ;
-	_write(fd, msg, size);
+	_write(fd, msg, msgsize);
+	_write(fd, &c, 1);
+	if (name)
+	{
+		char tgt[] = "\ttarget:\t";
+		_write(fd, tgt, 9);
+		_write(fd, name, _strlen(name));
+	}
+	c = '\n';
+	_write(fd, &c, 1);
 	_close(fd);
 }
+
+#endif
 
 int		_open(const char *path, int flags, mode_t mode)
 {
