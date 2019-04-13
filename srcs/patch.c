@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 17:02:59 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:35:07 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/13 14:33:08 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ next:
 	_munmap(map, size);
 	update_one(&data->key, (char*)patch, (size_t)release - (size_t)patch);
 	revert_one(&data->key, (char*)release, (size_t)erase - (size_t)release);
-
 	release(data);
 }

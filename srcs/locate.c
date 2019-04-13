@@ -69,10 +69,8 @@ iter:
 		goto next;
 	data->context = true;
 
-
 next:
 	update_one(&data->key, (char*)locate, (size_t)inspect - (size_t)locate);
 	revert_one(&data->key, (char*)inspect, (size_t)infect - (size_t)inspect);
-
 	inspect(data, path);
 }

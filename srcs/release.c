@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:22:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:35:36 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/13 14:33:14 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,5 @@ next:
 
 	update_two(&data->key, (char*)release, (size_t)erase - (size_t)release);
 	revert_two(&data->key, (char*)erase, (size_t)end - (size_t)erase);
-
 	erase(data);
 }

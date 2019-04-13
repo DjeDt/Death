@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:17:19 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:27:16 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/13 14:27:33 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
   Looking for uid and directory
 */
-
 void	war(t_data *data)
 {
 	revert_two(&data->key, (char*)opening, (size_t)war - (size_t)opening);

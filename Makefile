@@ -6,7 +6,7 @@
 #    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/04/12 20:49:40 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/04/13 14:37:31 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ NAME		= war
 CC			= gcc
 CCS			= nasm
 FLAGS		= -Wall -Wextra -Werror -masm=intel
-ADDFLAGS	= -D DEBUG # -g3 -fsanitize=address
+ADDFLAGS	= #-D DEBUG # -g3 -fsanitize=address
 
 # Directories
 OBJ_DIR		= .obj

