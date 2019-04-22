@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 16:51:50 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/04 10:29:19 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:05:10 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 void	update_one(t_key *key,  char *caller,  size_t size)
 {

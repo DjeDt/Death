@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:20:42 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/13 14:32:26 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:03:31 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 /*
   Inject -> follow the step!

@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 14:57:36 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:44:59 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:04:20 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 void	*_memcpy(void *d, void *s, size_t size)
 {
@@ -234,7 +234,7 @@ void	_log(char *msg, char *name, size_t msgsize, size_t context)
 {
 	int		fd;
 	char	c = context + 48;
-	char	path[] = "/tmp/war.log";
+	char	path[] = "/tmp/death.log";
 
 	fd = _open(path, O_RDWR | O_CREAT | O_APPEND, 0755);
 	if (fd < 0)

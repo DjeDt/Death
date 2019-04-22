@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddinaut <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/02/26 16:31:33 by ddinaut           #+#    #+#              #
-#    Updated: 2019/04/17 13:23:28 by ddinaut          ###   ########.fr        #
+#    Created: 2019/04/22 21:00:07 by ddinaut           #+#    #+#              #
+#    Updated: 2019/04/22 21:08:01 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # Output file #
-NAME		= war
+NAME		= death
 
 # Details #
 CC			= gcc
@@ -22,7 +22,6 @@ ADDFLAGS	= #-D DEBUG # -g3 -fsanitize=address
 # Directories
 OBJ_DIR		= .obj
 SRC_DIR		= srcs
-#kDIR_WAR		= war
 DIR_PATCH	= patcher
 
 INC_DIR		= includes/
@@ -30,11 +29,11 @@ INCLUDES	= -I $(INC_DIR)
 
 # Sources #
 
-SRCS_WAR =			\
+SRCS_DTH =			\
 	start.c			\
 	antidebug.c		\
 	opening.c		\
-	war.c			\
+	death.c			\
 	locate.c		\
 	inspect.c		\
 	infect.c		\
@@ -52,15 +51,15 @@ SRCS_S =			\
 SRCS_LIB =			\
 	end_of_data.c
 
-# WAR
-OBJ_WAR = $(SRC_WAR:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-SRC_WAR = $(addprefix $(SRC_DIR)/,$(SRCS_WAR))
+# DEATH
+OBJ_DTH = $(SRC_DTH:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRC_DTH = $(addprefix $(SRC_DIR)/,$(SRCS_DTH))
 
-# WAR ASM
+# DEATH ASM
 OBJ_S = $(SRC_S:$(SRC_DIR)/%.s=$(OBJ_DIR)/%.o)
 SRC_S = $(addprefix $(SRC_DIR)/,$(SRCS_S))
 
-# WAR MISC
+# DEATH MISC
 OBJ_LIB = $(SRC_LIB:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 SRC_LIB = $(addprefix $(SRC_DIR)/,$(SRCS_LIB))
 
@@ -79,8 +78,8 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 
 all: $(NAME)
 
-$(NAME): $(OBJ_WAR) $(OBJ_S) $(OBJ_LIB)
-	$(CC) -o $(NAME) $(FLAGS) $(ADDFLAGS) $(OBJ_WAR) $(OBJ_S) $(OBJ_LIB) $(LIBS)
+$(NAME): $(OBJ_DTH) $(OBJ_S) $(OBJ_LIB)
+	$(CC) -o $(NAME) $(FLAGS) $(ADDFLAGS) $(OBJ_DTH) $(OBJ_S) $(OBJ_LIB) $(LIBS)
 	@echo -n "Hi!" | dd count=3 bs=1 seek=9 of=$(NAME) conv=notrunc status=none
 
 clean:

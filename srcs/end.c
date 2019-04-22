@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:19:24 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/13 14:34:21 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:03:57 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 /*
   End() redo the stack used during infection.

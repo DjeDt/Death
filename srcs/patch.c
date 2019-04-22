@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 17:02:59 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/13 14:33:08 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:03:39 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 /*
    Patch -> can be considered as the second part of infect().

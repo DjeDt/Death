@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:20:56 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/22 20:35:27 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:03:51 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 
 /*
@@ -28,8 +28,8 @@ void	erase(t_data *data)
 	_log(log, NULL,  7, data->context);
 #endif
 
-	char	*start = (char*)war;
-	int		size = (size_t)release - (size_t)war;
+	char	*start = (char*)death;
+	int		size = (size_t)release - (size_t)death;
 	char	buf[size];
 
 	// random or zeroed

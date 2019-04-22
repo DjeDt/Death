@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:28:21 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/20 19:47:49 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:03:18 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 /*
   Inspect() verify that selected binary is a clean, executable, x86_64 binary etc.

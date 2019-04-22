@@ -6,11 +6,11 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 13:37:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/17 11:03:34 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 21:01:56 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "war.h"
+#include "death.h"
 
 /*
    Antidebug() check if the current proccess is ptraced.
@@ -52,6 +52,6 @@ void	antidebug(t_data *data)
 	}
 
 	update_two(&data->key, (char*)antidebug, (size_t)opening - (size_t)antidebug);
-	revert_two(&data->key, (char*)opening, (size_t)war - (size_t)opening);
+	revert_two(&data->key, (char*)opening, (size_t)death - (size_t)opening);
 	opening(data);
 }

