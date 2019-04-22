@@ -6,12 +6,16 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 13:37:18 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:27:53 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/17 11:03:34 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "war.h"
 
+/*
+   Antidebug() check if the current proccess is ptraced.
+   and exit in this case.
+*/
 void	antidebug(t_data *data)
 {
 
@@ -31,7 +35,7 @@ void	antidebug(t_data *data)
 		{
 			#ifdef DEBUG
 			char stap[] = "no debug plz\n";
-			_write(1, stap, 13);
+			_write(2, stap, 13);
 			#endif
 			__exit(1);
 		}

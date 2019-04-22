@@ -6,7 +6,7 @@
 /*   By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:20:56 by ddinaut           #+#    #+#             */
-/*   Updated: 2019/04/12 20:42:14 by ddinaut          ###   ########.fr       */
+/*   Updated: 2019/04/17 10:45:05 by ddinaut          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ void	erase(t_data *data)
 
 	for (register int i = 0 ; i < size ; i++)
 		start[i] = buf[i];
-
-	/* disabled due to mysterious segfault in infected binary that pop out of nowhere */
-	/* update_two(&data->key, (char*)release, (size_t)end - (size_t)release); */
-	/* revert_two(&data->key, (char*)end, (size_t)update_one - (size_t)end); */
 
 	end(data);
 }

