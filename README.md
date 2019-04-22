@@ -38,9 +38,7 @@ At the same time, we implemented a simple polymorphic routine with a given finge
 Finally, our last addition is the implementation of a polymorphic routine that structurally modifies balised code.
 Discover so much in a little time gave me some headache, but hey, that's what we want.
 
-## III - External view
-
-## III - Internal view
+## III - View
 
 In Death, we implemented a pt_note infection as describe by Elfmaster in his book [book name] .
 This infection method is great because instead of the segment padding infection, pt_note allow us to infect a binary without any size limit.
@@ -51,7 +49,21 @@ We implemented a one go execution. There is no going back. As you can see, each 
 Each function is the key that will be use to decrypt the next one. the called function will encrypt asap the caller function, execute and decrypt the next one etc etc.
 It prevents static and dynamic analysis and allow to do 'marlouteries' during the execution.
 
-### Flow:
+### *  - Basic usage
+
+```shell
+
+$> make
+$> ./run.sh create	# it create /tmp/test1 and /tmp/test2 directories and populate it with basic binaries.
+$> ./death			# yeaaaaa
+$> ./run.sh search	# it looks into /tmp/test1 and /tmp/test2 and check for infected binaries.
+
+hint: You can enable debug by uncomment `#-D DEBUG` in the Makefile and then 'make re'.
+	  then look at /tmp/death.log to follow the execution flow.
+```
+
+
+## IV - Flow:
 
 (there is comments above each functions that are pretty much the same than here)
 
@@ -94,7 +106,7 @@ End:		end is our balise to get back our primary rbp so we can get pop back all o
 			Since we did not do any return, our stack pointer constanly growm, so we have to get it back like if we had to.
 			the `jmp __exit` is here to exit if we are the 0 infection (aka ./death), or to `jmp __entrypoint` if it's about an infected.
 
-## - IV Conclusion
+## - V Conclusion
 
 So what did we learn? I would say a lot.
 We learnt a lot about encryption, binary file format (espscialy ELF, how the kernel load it ..), how to use debugger like gdb or radare2, about how a defined architecturw can be reversed and/or hacked.
