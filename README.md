@@ -76,9 +76,10 @@ Antidebug:	Death look if the current proccess is traced by a debugger like gdb o
 **Infect**: Now that we are sure that the selected binary can be infected, we change the metadata to have enough room for the injection. We locate the pt_note segment and then transform it to a pt_load segment and gave it read, write, execution permission. This way we are sure to be loaded with the original binary. We also strip all section during the process to remove the symbol table and to be as light as we can.
 
 **Inject**: This is in my opinion the most interesting part. This is where we modify, polymorph and encrypt our data. This function is divided in step so you can follow the flow easily. Our polymorphism is based on the use of placeholder code that we add to our rc4 function. It change the register used for the push/pop instructions by random registers.
+
 ```
-![Screenshot](docs/before_poly.png)
-![Screenshot](docs/after_poly.png)
+[Screenshot](docs/before_poly.png)
+[Screenshot](docs/after_poly.png)
 ```
 
 **Patch**: this function is designed to patch injected data. we modify the `jmp __exit` instruction in end() to `jmp real_binary`. furthermore this is where we encrypt all the binary using _rc4().
