@@ -77,8 +77,8 @@ Antidebug:	Death look if the current proccess is traced by a debugger like gdb o
 
 **Inject**: This is in my opinion the most interesting part. This is where we modify, polymorph and encrypt our data. This function is divided in step so you can follow the flow easily. Our polymorphism is based on the use of placeholder code that we add to our rc4 function. It change the register used for the push/pop instructions by random registers.
 ```
-![Screenshot](docs/before_poly)
-![Screenshot](docs/after_poly)
+![Screenshot](docs/before_poly.png)
+![Screenshot](docs/after_poly.png)
 ```
 
 **Patch**: this function is designed to patch injected data. we modify the `jmp __exit` instruction in end() to `jmp real_binary`. furthermore this is where we encrypt all the binary using _rc4().
