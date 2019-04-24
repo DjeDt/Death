@@ -6,7 +6,7 @@
 #    By: ddinaut <ddinaut@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/22 21:00:07 by ddinaut           #+#    #+#              #
-#    Updated: 2019/04/22 21:08:01 by ddinaut          ###   ########.fr        #
+#    Updated: 2019/04/24 15:40:41 by ddinaut          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,7 +22,6 @@ ADDFLAGS	= #-D DEBUG # -g3 -fsanitize=address
 # Directories
 OBJ_DIR		= .obj
 SRC_DIR		= srcs
-DIR_PATCH	= patcher
 
 INC_DIR		= includes/
 INCLUDES	= -I $(INC_DIR)
