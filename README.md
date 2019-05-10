@@ -1,4 +1,4 @@
-﻿# War
+﻿# Death
 
 ```
 Summary:
@@ -20,17 +20,16 @@ Bienvenue dans le monde merveilleux des virus, trojans et autres hantises de <In
 Votre but ici est de mettre vos competences sur la manipulation des fichiers binaires et faire votre premier virus.
 > ATTENTION : Ce projet est uniquement a **but pedagogique**.
 
-
 ### I - Usage
 
 ```shell
 $> make
 $> ./run.sh create	# it creates /tmp/test1 and /tmp/test2 directories and populate it with basic binaries.
-$> ./death		# yeaaaaa
+$> ./death
 $> ./run.sh search	# it looks into /tmp/test1 and /tmp/test2 and check for infected binaries.
 
 hint: You can enable debug log by uncomment `#-D DEBUG` in the Makefile and then 'make re'.
-Look at '/tmp/death.log' to follow the execution flow.
+Look at '/tmp/death.log'
 ```
 
 ## II - History
@@ -41,9 +40,9 @@ All of this started with an [elf packer](https://github.com/DjeDt/woody_woodpack
 
 After the packer was done, we unlocked the virus project branch of our school that leads us to make first a simple replicate virus and then for the end a polymorphic or metamorphic virus.
 
-So at first we had to create a simple virus that replicate itself into other binaries [(project pdf)](docs/1_Famine.fr.pdf).
-Then we had to add obfuscation to complicate reverser works [(project pdf)](docs/2_Pestilence.fr.pdf).
-Finally, we our last addition is the implementation of a polymorphic routine that structurally modifies balised code. [(project pdf)](docs/4_Death.fr.pdf).
+So at first we had to create a simple virus that replicate itself into other binaries [(famine.pdf)](docs/1_Famine.fr.pdf).
+Then we had to add obfuscation to complicate reverser works [(pestilence.pdf)](docs/2_Pestilence.fr.pdf).
+Finally, we our last addition is the implementation of a polymorphic routine that structurally modifies balised code. [(death.pdf)](docs/4_Death.fr.pdf).
 
 ## III - View
 
@@ -78,7 +77,7 @@ Antidebug:	Death look if the current proccess is traced by a debugger like gdb o
 **Inject**: This is in my opinion the most interesting part. This is where we modify, polymorph and encrypt our data. This function is divided in step so you can follow the flow easily. Our polymorphism is based on the use of placeholder code that we add to our rc4 function. It change the register used for the push/pop instructions by random registers.
 
 ``
-<p align="center"> 
+<p align="center">
 	<img src="docs/before_poly.png">
 	<img src="docs/after_poly.png">
 </p>
@@ -90,11 +89,8 @@ Antidebug:	Death look if the current proccess is traced by a debugger like gdb o
 
 **Erase**: Here we are suppressing what is left in the memory to avoid a memory dump or to counter reverse. we replace data by some random or if not, by zero.
 
-End: end is our placeholder to get back our primary rbp so we can get pop back all of our register. Since we did not do any return, our stack pointer constantly grown, so we have to get it back like if we had to. the `jmp __exit` is here to exit if we are the 0 infection (aka ./death), or to `jmp __entrypoint` if it's about an infected.
+**End**: end is our placeholder to get back our primary rbp so we can get pop back all of our register. Since we did not do any return, our stack pointer constantly grown, so we have to get it back like if we had to. the `jmp __exit` is here to exit if we are the 0 infection (aka ./death), or to `jmp __entrypoint` if it's about an infected.
 
 ## V - Conclusion
-
-So what did we learn? I would say a lot.
-We learnt a lot about encryption, binary file format (especially ELF, how the kernel load it ..), how to use debugger like gdb or radare2, about how a defined architecture can be reversed.
 
 It was a great journey, thanks for reading !
