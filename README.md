@@ -46,9 +46,9 @@ Finally, we our last addition is the implementation of a polymorphic routine tha
 
 ## III - View
 
-In Death, we implemented a pt_note infection as describe by Elfmaster in his book [book name] .
-This infection method is useful because instead of the segment padding infection, pt_note allow us to infect a binary without any size limit.
-It's visible but this project is not aim to be a silent virus, be to learn as much as possible.
+In Death, we implemented a pt_note infection as describe by Elfmaster.
+
+This infection method is useful because instead of the segment padding infection, pt_note allow us to infect a binary without any size limit. It's visible but this project is not aim to be a silent virus, but to learn as much as possible.
 
 We decided to write this project in a totally new way that allow us to prevent static reverse way better than with traditional code. We implemented a one go execution. As you can see, each function call the next one without turning back.
 
@@ -59,7 +59,7 @@ This leads to the encryption method. Each function is the key that will be use t
 
 (there is comments above each functions that are pretty much the same than here)
 
-**Start**: From the host, the main is called and aim to tranform the binary like an infected should be. From an infected binary, start() (it's the entrypoint) backup all registers, save the stack pointeur and decrypt the first encrypted data. [A REFORMULER]
+**Start**: From the host, the main is called and aim to tranform the binary like an infected should be. From an infected binary, start() (it's the entrypoint) backup all registers, save the stack pointeur and decrypt the first encrypted data.
 
 Antidebug:	Death look if the current proccess is traced by a debugger like gdb or radare2 by using ptrace.
 			If yes, it exit and give the hand to the father, which exit by using WEXITSTATUS.
